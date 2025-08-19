@@ -1,0 +1,60 @@
+# This workflow is triggered by the `issue_chat_agent` when a specific label
+# is added to a GitHub issue. It sets up the environment and runs the
+# `coding_agent` to process the issue.
+name: Beaker (swe-agent)
+
+# This trigger allows the workflow to be manually run with a workflow_dispatch event.
+# The 'inputs' section defines the parameters that can be passed to the workflow.
+on:
+  workflow_dispatch:
+    inputs:
+      issue_id:
+        description: 'The number of the GitHub issue to process.'
+        required: true
+        type: number
+
+# Grant the necessary permissions for the workflow. The agent needs to read the
+# repository's content and write to issues and pull requests.
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+# A workflow is composed of one or more jobs.
+jobs:
+  build_and_run:
+    # Use the latest version of the Ubuntu Linux runner.
+    runs-on: ubuntu-latest
+    
+    # Define a set of environment variables for this job.
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+    # Define the steps that will be executed in this job.
+    steps:
+      # Step 1: Check out the repository code.
+      # This action makes the repository's code available to the workflow.
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Python.
+      # This action installs a specified version of Python and adds it to the PATH.
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11' # Use the Python version compatible with your project.
+          cache: 'pip'
+
+      # Step 3: Install project dependencies.
+      # It's good practice to install from a `requirements.txt` file to ensure
+      # a consistent environment.
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      # Step 4: Run the Coding Agent.
+      # This is the core step that executes the agent's logic.
+      # It passes the `issue_id` from the workflow inputs to the agent's run command.
+      - name: Run Coding Agent
+        run: python -m bunsen.coding_agent.agent ${{ github.event.inputs.issue_id }}
+

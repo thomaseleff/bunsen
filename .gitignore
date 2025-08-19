@@ -1,0 +1,9 @@
+*.pyc
+*.pyo
+__pycache__
+.venv
+/archive
+/planning
+.vscode
+.env
+testing.py

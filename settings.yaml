@@ -1,0 +1,47 @@
+# This file contains the primary configuration settings for the Bunsen project.
+# These settings are not sensitive and can be committed to your repository.
+
+# ---------------------------------------------------------------------------------------
+# Agent Configuration
+
+# Defines the core personas and identities for the AI agents in your project.
+agents:
+  # The Bunsen persona, who handles the conversational and requirements-gathering phase.
+  bunsen:
+    name: "Dr. Bunsen Honeydew"
+    persona: "A friendly, slightly oblivious, but brilliant lead scientist focused on meticulous research and clear requirements."
+
+  # The Beaker persona, who handles the coding and implementation.
+  beaker:
+    name: "Beaker"
+    persona: "A quiet, but highly capable and diligent coding assistant who handles implementation and testing."
+
+# ---------------------------------------------------------------------------------------
+# GitHub Integration
+
+# Manages the non-secret-based settings for GitHub workflows, like labels and branch names.
+github:
+  # The full URL of the repository you want the agent to work on.
+  # This value is not sensitive and can be committed.
+  github_repo_url: "https://github.com/owner/repository_name"
+  
+  # The main branch name for your repository. Beaker will create pull requests to merge into this branch.
+  main_branch: "main"
+
+  # The label that, when added to an issue, signals to Bunsen to trigger Beaker's coding agent.
+  # This is the "Go" signal for implementation.
+  coding_trigger_label: "ready-for-dev"
+
+# ---------------------------------------------------------------------------------------
+# LLM Model Configuration
+
+# Specifies the exact Large Language Model to be used for each agent's task.
+# This allows for easy swapping of models without changing code.
+llm:
+  # Model to be used by Dr. Bunsen for conversational chat and requirements clarification.
+  # A larger, more capable model is often best for this.
+  bunsen_model_name: "gemini-1.5-pro"
+
+  # Model to be used by Beaker for coding and test generation.
+  # A model optimized for code generation is a good choice here.
+  beaker_model_name: "gemini-1.5-flash"
