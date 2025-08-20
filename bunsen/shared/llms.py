@@ -1,52 +1,32 @@
-from typing import Any, Dict, Literal
+"""LLMs"""
+
+from typing import Any, Literal
 import litellm
-import dotenv
 
-from bunsen.shared import yaml_utils
-
-
-class Provider:
-
-    def __init__(self, model_name: str):
-        self.model_name = model_name
-
-        dotenv.load_dotenv()
-
-    def chat(self, messages: list[dict]) -> Any:
-        """
-        Send a chat/completion request using litellm.
-        messages: list of dicts in OpenAI format [{"role": "user", "content": "..."}, ...]
-        """
-        # Prepare litellm parameters
-        params = {
-            "model": self.model_name,
-            "messages": messages,
-        }
-
-        # Call litellm
-        response = litellm.completion(**params)
-
-        return response
+from bunsen.shared import settings
 
 
-def load_llm_config() -> Dict[str, Any]:
+def chat(model: str, messages: list[dict]) -> Any:
+    """Send a chat/completion request using litellm.
 
-    # Load settings.yaml
-    settings = yaml_utils.load_yaml_file("settings.yaml")
+    Args:
+        model (str): The model name to use for the request.
+        messages (list[dict]): The list of dicts in OpenAI format [{"role": "user", "content": "..."}, ...]
+    """
 
-    return {
-        "bunsen_model_name": settings.get("llm", {}).get("bunsen_model_name"),
-        "beaker_model_name": settings.get("llm", {}).get("beaker_model_name"),
+    # Prepare litellm parameters
+    params = {
+        "model": model,
+        "messages": messages,
     }
 
+    # Chat
+    response = litellm.completion(**params)
 
-def get_llm_provider(
+    return response
+
+
+def get_llm_model(
     agent: Literal["bunsen", "beaker"],
-) -> Provider:
-
-    # Load the LLM configuration
-    config = load_llm_config()
-
-    return Provider(
-        model_name=config["bunsen_model_name"] if agent == "bunsen" else config["beaker_model_name"],
-    )
+) -> str:
+    return settings.BUNSEN_MODEL_NAME if agent == "bunsen" else settings.BEAKER_MODEL_NAME

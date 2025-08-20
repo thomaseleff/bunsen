@@ -1,6 +1,6 @@
-# This workflow is triggered by the `issue_chat_agent` when a specific label
+# This workflow is triggered by the Bunsen issue-agent when a specific label
 # is added to a GitHub issue. It sets up the environment and runs the
-# `coding_agent` to process the issue.
+# Beaker swe-agent to process the issue.
 name: Beaker (swe-agent)
 
 # This trigger allows the workflow to be manually run with a workflow_dispatch event.
@@ -8,8 +8,16 @@ name: Beaker (swe-agent)
 on:
   workflow_dispatch:
     inputs:
+      repo_name:
+        description: 'The name of the GitHub repository.'
+        required: true
+        type: str
+      installation_id:
+        description: 'The GitHub App installation ID to use for authentication.'
+        required: true
+        type: number
       issue_id:
-        description: 'The number of the GitHub issue to process.'
+        description: 'The id of the GitHub issue to process.'
         required: true
         type: number
 
@@ -55,6 +63,6 @@ jobs:
       # Step 4: Run the Coding Agent.
       # This is the core step that executes the agent's logic.
       # It passes the `issue_id` from the workflow inputs to the agent's run command.
-      - name: Run Coding Agent
-        run: python -m bunsen.coding_agent.agent ${{ github.event.inputs.issue_id }}
+      - name: Run swe-agent
+        run: python -m bunsen.swe_agent.agent --repo_name ${{ github.event.inputs.repo_name}} --installation_id ${{ github.event.inputs.installation_id}} --issue_id ${{ github.event.inputs.issue_id }}
 

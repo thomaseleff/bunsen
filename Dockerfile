@@ -1,11 +1,13 @@
-# Bunsen Issue Chat Agent
+# Set the operating-system
 FROM python:3.12-slim
 
+# Set the working directory
 WORKDIR /bunsen
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy project files
@@ -13,10 +15,13 @@ COPY . /bunsen
 
 # Install Python dependencies
 RUN python -m pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install .
 
 # Set environment variables
 ENV PYTHONUNBUFFERED=1
 
-# Run the agent
-CMD ["python", "-m", "bunsen.issue_chat_agent.agent"]
+# Expose the port
+EXPOSE 8000
+
+# Run the Bunsen issue-agent
+CMD ["python", "-m", "bunsen.issue_agent.agent"]

@@ -42,7 +42,7 @@ The interaction between the user, Bunsen, and Beaker is a carefully orchestrated
   1. A user creates a GitHub issue or adds a comment.
   2. GitHub sends a webhook payload to your deployed `issue_chat_agent` (a FastAPI application).
   3. The `issue_chat_agent` processes this payload. If it detects the ready-for-dev label, it initiates the next phase.
-  4. The `issue_chat_agent` makes a GitHub API call to trigger the `coding_agent.yaml` GitHub Actions workflow, passing the issue ID as a parameter.
+  4. The `issue_chat_agent` makes a GitHub API call to trigger the `swe_agent.yaml` GitHub Actions workflow, passing the issue ID as a parameter.
   5. A GitHub runner starts a job, clones the repository, and executes the Python script for the coding_agent.
   6. The `coding_agent` gets to work, generating code and creating a pull request for human review.
 
@@ -51,7 +51,7 @@ The interaction between the user, Bunsen, and Beaker is a carefully orchestrated
 Deploying the Bunsen system involves two main components:
 
   * **Issue Agent** (`bunsen/issue_chat_agent/agent.py`): This is a FastAPI application that must be hosted on a public server (like a cloud VM or container platform) so GitHub's webhook can reach it.
-  * **Coding Agent** (`bunsen/coding_agent/agent.py`): This agent runs directly on GitHub's own infrastructure via GitHub Actions. It does not require separate hosting. Your workflow file (`coding_agent.yaml`) tells GitHub how to set up the environment and run the agent.
+  * **Coding Agent** (`bunsen/coding_agent/agent.py`): This agent runs directly on GitHub's own infrastructure via GitHub Actions. It does not require separate hosting. Your workflow file (`swe_agent.yaml`) tells GitHub how to set up the environment and run the agent.
 
 ----
 

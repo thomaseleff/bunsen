@@ -1,36 +1,36 @@
-import subprocess
+"""Beaker swe-agent runner"""
+
 import os
-
 from github import GithubException
+import subprocess
 
-from bunsen.shared import github_client
-from bunsen.coding_agent import config, prompts
+from bunsen.shared import github
+from bunsen.swe_agent import prompts
 
 
-class CodingAgentRunner:
-    """
-    Orchestrates the coding agent's workflow, acting as an entry point for
+class Beaker:
+    """Orchestrates the Beaker swe-agent workflow, acting as an entry point for
     GitHub Actions.
-
-    This class prepares the environment and executes the `swe-agent`
-    workflow to resolve a GitHub issue.
     """
 
-    def __init__(self, config: config.CodingAgentConfig):
-        """
-        Initializes the CodingAgentRunner with the given configuration.
+    def __init__(self, app_id: str, private_key: str, installation_id: int):
+        """Initializes the Beaker swe-agent.
 
         Args:
-            config (CodingAgentConfig): The configuration object for the runner.
+            app_id (str): The ID of the GitHub App.
+            private_key (str): The private key for the GitHub App.
+            installation_id (int): The ID of the specific installation to act on behalf of.
         """
-        self.config = config
-        self.github_client = github_client.GitHubClient(
-            token=config.github_token
+
+        # Initialize the GitHub client with GitHub App credentials
+        self.github_client = github.Client(
+            app_id=app_id,
+            private_key=private_key,
+            installation_id=installation_id,
         )
 
-    def run(self, issue_id: int):
-        """
-        The main entry point for the coding agent.
+    def dispatch(self, repo_name: str, repo_url: str, issue_id: int):
+        """The main entry point for the Beaker swe-agent.
 
         This method orchestrates the full workflow:
         1. Gets the issue information.
@@ -38,20 +38,23 @@ class CodingAgentRunner:
         3. Posts a comment to the GitHub issue with the outcome.
 
         Args:
+            repo_name (str): The name of the GitHub repository.
+            repo_url (str): The url of the GitHub repository.
             issue_id (int): The number of the GitHub issue to work on.
         """
-        repo_name = self.config.github_repo_url.split('/')[-2] + '/' + self.config.github_repo_url.split('/')[-1]
         print(f"Coding Agent started for issue #{issue_id} in '{repo_name}'.")
 
         try:
-            # 1. Get the issue to ensure it exists and to get its details for the LLM.
+
+            # Retrieve the issue
             issue = self.github_client.get_issue(repo_name=repo_name, issue_id=issue_id)
             issue_title: str = issue.title
             issue_body: str = issue.body
 
-            # 2. Use the LLM to generate a plan for the agent based on the issue details.
+            # Build the prompt for the LLM
             llm_plan: str = prompts.get_issue_plan_prompt(
-                issue_title=issue_title, issue_body=issue_body
+                issue_title=issue_title,
+                issue_body=issue_body,
             )
             self.github_client.post_comment(
                 repo_name=repo_name,
@@ -59,24 +62,23 @@ class CodingAgentRunner:
                 body=f"I've started working on this issue. Here is my plan:\n\n{llm_plan}",
             )
 
-            # 3. Execute the SWE-agent workflow using the CLI.
-            print("Executing SWE-agent via subprocess.")
-
-            # Construct the command to run the sweagent CLI
+            # Construct the command to run the Beaker swe-agent
             cmd = [
                 "sweagent",
                 "run",
                 "--env.repo.github_url",
-                self.config.github_repo_url,
+                repo_url,
                 "--env.repo.issue_id",
                 str(issue_id),
             ]
 
-            # Pass the GitHub token as an environment variable for the subprocess
-            env = os.environ.copy()
-            env["GITHUB_TOKEN"] = self.config.github_token
+            # Copy the environment variables containing the
+            #   credentials for the LLM provider
 
-            # Use subprocess.run to execute the command and capture output
+            env = os.environ.copy()
+
+            # Run the beaker swe-agent
+            print("Running the Beaker swe-agent.")
             result = subprocess.run(
                 cmd,
                 cwd=os.getcwd(),  # The subprocess will run from the current working directory
@@ -92,9 +94,9 @@ class CodingAgentRunner:
             print("SWE-agent stderr:")
             print(result.stderr)
 
-            print("SWE-agent finished successfully.")
+            print("The Beaker swe-agent finished successfully.")
 
-            # 4. Post a comment to the issue with the outcome
+            # Update the issue with the result
             self.github_client.post_comment(
                 repo_name=repo_name,
                 issue_id=issue_id,

@@ -1,9 +1,13 @@
 *.pyc
 *.pyo
 __pycache__
+build
+*.egg-info
 .venv
+.coverage
+.vscode
+.pytest_cache
+.env
 /archive
 /planning
-.vscode
-.env
 testing.py

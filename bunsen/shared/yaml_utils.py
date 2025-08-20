@@ -1,13 +1,10 @@
+"""YAML utilities"""
+
 import yaml
-from typing import Dict
 
 
-def load_yaml_file(file_path: str) -> Dict:
-    """
-    Loads and parses a YAML file from a given path.
-
-    This utility function provides a reusable way to read configuration files
-    safely and handles cases where the file might not exist.
+def load_yaml_file(file_path: str) -> dict:
+    """Loads and parses a YAML file from a given path.
 
     Args:
         file_path (str): The full path to the YAML file.

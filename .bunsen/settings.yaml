@@ -1,0 +1,9 @@
+github:
+  repo_url: https://github.com/thomaseleff/bunsen
+  main_branch: main
+  coding_trigger_label: ready-for-dev
+  coding_workflow_filename: swe_agent.yaml
+
+llm:
+  bunsen_model_name: gemini-1.5-pro
+  beaker_model_name: gemini-1.5-flash
