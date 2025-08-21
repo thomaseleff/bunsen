@@ -32,6 +32,7 @@ permissions:
 jobs:
   build_and_run:
     runs-on: ubuntu-latest
+    environment: swe-agent
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       BUNSEN_GITHUB_APP_ID: ${{ secrets.BUNSEN_GITHUB_APP_ID }}
