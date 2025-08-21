@@ -45,7 +45,16 @@ async def github_webhook(request: Request):
         request (Request): The incoming request object from FastAPI.
     """
 
-    # Verify the webhook signature to ensure the request is from GitHub
+    # Get the event type from the headers
+    event_type = request.headers.get("X-GitHub-Event", "ping")
+
+    # Handle the 'ping' event to confirm the webhook is active
+    if event_type == "ping":
+        return {"msg": "Ping event received successfully!"}
+
+    # Otherwise, verify the webhook signature to ensure the request
+    #   is from GitHub
+
     signature = request.headers.get("X-Hub-Signature-256")
     if not signature:
         raise HTTPException(
@@ -62,13 +71,6 @@ async def github_webhook(request: Request):
             status_code=403, detail="X-Hub-Signature-256 header is invalid"
         )
 
-    # Get the event type from the headers
-    event_type = request.headers.get("X-GitHub-Event", "ping")
-
-    # Handle the 'ping' event to confirm the webhook is active
-    if event_type == "ping":
-        return {"msg": "Ping event received successfully!"}
-
     # Parse the request body as JSON
     payload = await request.json()
     action = payload.get("action")
@@ -84,13 +86,13 @@ async def github_webhook(request: Request):
     # If any required information is missing, stop processing.
     if not all([installation_id, repo_name, issue_id]):
         print("Missing required information in the webhook payload. Ignoring event.")
-        return {"msg": "Payload incomplete. Ignoring."}
+        return {"msg": "Payload incomplete. Ignoring..."}
 
     # Instantiate the agent using the new credentials.
     try:
         bunsen = create_issue_chat_agent(installation_id=installation_id)
     except Exception as e:
-        print(f"Could not create the issue-agent: {e}")
+        print(f"Could not create the Bunsen issue-agent: {e}")
         return {"msg": "The Bunsen issue-agent initialization failed. Ignoring..."}
 
     # Dispatch the Beaker swe-agent workflow if the issue is labeled with the coding trigger

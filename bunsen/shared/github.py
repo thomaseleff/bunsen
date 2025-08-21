@@ -1,8 +1,6 @@
 """Github client"""
 
-import requests
 from github import Github, Auth, GithubException, Repository, Issue, IssueComment
-import urllib.parse as urlparse
 
 
 class Client:
@@ -22,46 +20,29 @@ class Client:
             installation_id (int): The ID of the specific installation to act on behalf of.
         """
         try:
-            # Authenticate as the GitHub App
-            app_auth = Auth.AppAuth(app_id, private_key)
 
-            # Retrieve a temporary installation access token
-            self.g = Github(auth=app_auth.get_installation_auth(installation_id))
+            # Create a Github App authentication token
+            app_auth = Auth.AppAuth(app_id, private_key)
+            app_installation_auth = app_auth.get_installation_auth(installation_id)
+
+            # Authenticate
+            self.identity = Github(auth=app_auth)  # Authenticate as the app for the identity
+            self.g = Github(auth=app_installation_auth)  # Authenticate as the app installation for requests
+
+            # Retain the authenticated requester
+            self.requests = self.g.requester
 
             # Retain the installation ID and token for API requests
             self.installation_id = installation_id
-            self.installation_token = app_auth.get_installation_auth(installation_id).token
 
-            # Retain the Github App user
-            self.user = self.g.get_user().login
+            # Retain the Github App name
+            self.user = self.identity.get_app().name
 
             print(f"Successfully authenticated as `{self.user}`.")
 
         except Exception as e:
             print(f"Error authenticating to GitHub: {e}")
             raise
-
-    def _parse_repo_metadata_from_url(self, repo_url: str) -> tuple[str, str] | None:
-        """A private helper method to parse the repository owner and name from a URL.
-
-        Args:
-            repo_url (str): The URL of the repository (e.g., 'https://github.com/{owner}/{repo}').
-
-        Returns:
-            tuple[str, str] | None: A tuple containing the repository owner and name,
-            or None if the URL is invalid.
-        """
-        try:
-            parsed_url = urlparse(repo_url)
-            path_parts = parsed_url.path.strip('/').split('/')
-            if len(path_parts) >= 2:
-                owner = path_parts[0]
-                repo = path_parts[1]
-                return (owner, repo)
-            return None
-        except Exception as e:
-            print(f"Error parsing repository URL: {e}")
-            return None
 
     def get_repo(self, repo_name: str) -> Repository.Repository | None:
         """Retrieves a GitHub repository object.
@@ -167,23 +148,20 @@ class Client:
                 "ref": branch,
                 "inputs": {
                     "repo_name": repo_name,
+                    "repo_branch": branch,
                     "installation_id": str(self.installation_id),
-                    "issue_id": str(issue_id)
+                    "issue_id": str(issue_id),
                 }
             }
 
-            headers = {
-                "Accept": "application/vnd.github.v3+json",
-                "Authorization": f"token {self.installation_token}",
-                "Content-Type": "application/json"
-            }
+            # Dispatch
+            _ = self.requests.requestJsonAndCheck(
+                verb="POST",
+                url=url,
+                input=data
+            )
 
-            response = requests.post(url, headers=headers, json=data)
-
-            if response.status_code == 204:
-                print(f"Successfully triggered workflow '{workflow_filename}' for issue #{issue_id}")
-            else:
-                print(f"Failed to trigger workflow: {response.status_code} - {response.text}")
+            print(f"Successfully triggered workflow '{workflow_filename}' for issue #{issue_id}")
 
         except Exception as e:
             print(f"An error occurred while triggering the workflow: {e}")
