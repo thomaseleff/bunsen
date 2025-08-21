@@ -32,19 +32,22 @@ GITHUB_CODING_WORKFLOW_FILENAME = SETTINGS.get("github", {}).get("coding_workflo
 BUNSEN_MODEL_NAME = SETTINGS.get("llm", {}).get("bunsen_model_name")
 BEAKER_MODEL_NAME = SETTINGS.get("llm", {}).get("beaker_model_name")
 
+# Construct a dictionary of constants
+_constants = {
+    "env > GITHUB_APP_ID": GITHUB_APP_ID,
+    "env > GITHUB_PRIVATE_KEY": GITHUB_PRIVATE_KEY,
+    "env > GITHUB_WEBHOOK_SECRET": GITHUB_WEBHOOK_SECRET,
+    "settings > github > repo_url": GITHUB_REPO_URL,
+    "settings > github > main_branch": GITHUB_MAIN_BRANCH,
+    "settings > github > coding_trigger_label": GITHUB_CODING_TRIGGER_LABEL,
+    "settings > github > coding_workflow_filename":  GITHUB_CODING_WORKFLOW_FILENAME,
+    "llm > bunsen_model_name": BUNSEN_MODEL_NAME,
+    "llm > beaker_model_name": BEAKER_MODEL_NAME,
+}
+
 # Identify missing constants
 missing_constants = [
-    constant for constant in [
-        GITHUB_APP_ID,
-        GITHUB_PRIVATE_KEY,
-        GITHUB_WEBHOOK_SECRET,
-        GITHUB_REPO_URL,
-        GITHUB_MAIN_BRANCH,
-        GITHUB_CODING_TRIGGER_LABEL,
-        BUNSEN_MODEL_NAME,
-        BEAKER_MODEL_NAME,
-        GITHUB_CODING_WORKFLOW_FILENAME
-    ] if not constant
+    constant for constant in _constants.keys() if not _constants.get(constant)
 ]
 
 if missing_constants:
