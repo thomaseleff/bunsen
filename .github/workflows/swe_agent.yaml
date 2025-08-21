@@ -65,12 +65,12 @@ jobs:
       # Install swe-agent
       - name: Install swe-agent
         run: |
-          pip install swe-agent
+          pip install ./swe-agent
 
       # Install bunsen
       - name: Install bunsen
         run: |
-          pip install bunsen
+          pip install ./bunsen
 
       # Run the Coding Agent
       - name: Run swe-agent
