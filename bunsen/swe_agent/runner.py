@@ -59,7 +59,7 @@ class Beaker:
             self.github_client.post_comment(
                 repo_name=repo_name,
                 issue_id=issue_id,
-                body=f"I've started working on this issue. Here is my plan:\n\n{llm_plan}",
+                comment_body=f"I've started working on this issue. Here is my plan:\n\n{llm_plan}",
             )
 
             # Construct the command to run the Beaker swe-agent
@@ -100,7 +100,7 @@ class Beaker:
             self.github_client.post_comment(
                 repo_name=repo_name,
                 issue_id=issue_id,
-                body="I have successfully submitted a pull request to resolve this issue. Please review the changes."
+                comment_body="I have successfully submitted a pull request to resolve this issue. Please review the changes."
             )
 
         except subprocess.CalledProcessError as e:
@@ -112,19 +112,19 @@ class Beaker:
             self.github_client.post_comment(
                 repo_name=repo_name,
                 issue_id=issue_id,
-                body=f"I encountered a `swe-agent` CLI error while trying to fix this issue: {e}"
+                comment_body=f"I encountered a `swe-agent` CLI error while trying to fix this issue: {e}"
             )
         except GithubException as e:
             print(f"GitHub API error: {e}")
             self.github_client.post_comment(
                 repo_name=repo_name,
                 issue_id=issue_id,
-                body=f"I encountered a GitHub API error while trying to fix this issue: {e}"
+                comment_body=f"I encountered a GitHub API error while trying to fix this issue: {e}"
             )
         except Exception as e:
             print(f"An unexpected error occurred during the coding agent run: {e}")
             self.github_client.post_comment(
                 repo_name=repo_name,
                 issue_id=issue_id,
-                body=f"I encountered an unexpected error while trying to fix this issue: {e}"
+                comment_body=f"I encountered an unexpected error while trying to fix this issue: {e}"
             )

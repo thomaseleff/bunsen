@@ -129,7 +129,11 @@ class Bunsen:
 
             # Post the response as a comment on the issue
             comment_body = f"**{self.agent_name}** said:\n\n{llm_response}"
-            self.github_client.post_comment(repo_name, issue_id, comment_body)
+            self.github_client.post_comment(
+                repo_name=repo_name,
+                issue_id=issue_id,
+                comment_body=comment_body
+            )
 
     def dispatch_coding_agent(self, repo_name: str, issue_id: int):
         """Dispatches the coding agent workflow for the issue.
