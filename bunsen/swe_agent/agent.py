@@ -15,9 +15,9 @@ def main():
 
     # Parse command-line arguments
     parser = argparse.ArgumentParser(description="Dispatch the Beaker swe-agent.")
-    parser.add_argument("repo_name", type=str, help="The GitHub repository name in the format `{owner}/{repo}`.")
-    parser.add_argument("installation_id", type=int, help="The GitHub App installation ID to use for authentication.")
-    parser.add_argument("issue_id", type=int, help="The GitHub issue ID to implement, test, and commit.")
+    parser.add_argument("--repo_name", type=str, help="The GitHub repository name in the format `{owner}/{repo}`.")
+    parser.add_argument("--installation_id", type=int, help="The GitHub App installation ID to use for authentication.")
+    parser.add_argument("--issue_id", type=int, help="The GitHub issue ID to implement, test, and commit.")
     args = parser.parse_args()
 
     try:
