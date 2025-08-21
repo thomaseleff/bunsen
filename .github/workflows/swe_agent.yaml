@@ -72,7 +72,7 @@ jobs:
       # Install swe-agent
       - name: Install swe-agent
         run: |
-          pip install --editable ./swe-agent
+          pip install --editable ./swe-agent && pip install google-cloud-aiplatform
 
       # Install bunsen
       - name: Install bunsen
