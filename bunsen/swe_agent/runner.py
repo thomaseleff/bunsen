@@ -73,7 +73,8 @@ class Beaker:
                 repo_url,
                 "--problem_statement.github_url",
                 f"{repo_url}/issues/{str(issue_id)}",
-                "--actions.open_pr"
+                "--actions.open_pr",
+                "True",
             ]
 
             # Copy the environment variables containing the
