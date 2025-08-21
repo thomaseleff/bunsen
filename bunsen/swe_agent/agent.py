@@ -23,17 +23,18 @@ def main():
     try:
 
         # Initialize the Beaker swe-agent
-        agent = runner.Beaker(
+        beaker = runner.Beaker(
             app_id=settings.GITHUB_APP_ID,
             private_key=settings.GITHUB_PRIVATE_KEY,
             installation_id=args.installation_id,
         )
 
         # Dispatch the Beaker swe-agent workflow
-        agent.dispatch(
+        beaker.dispatch(
             repo_name=args.repo_name,
             repo_url=settings.GITHUB_REPO_URL,
-            issue_id=args.issue_id
+            issue_id=args.issue_id,
+            model_name=settings.BEAKER_MODEL_NAME,
         )
 
     except ValueError as e:

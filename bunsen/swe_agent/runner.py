@@ -29,7 +29,7 @@ class Beaker:
             installation_id=installation_id,
         )
 
-    def dispatch(self, repo_name: str, repo_url: str, issue_id: int):
+    def dispatch(self, repo_name: str, repo_url: str, issue_id: int, model_name: str):
         """The main entry point for the Beaker swe-agent.
 
         This method orchestrates the full workflow:
@@ -41,6 +41,7 @@ class Beaker:
             repo_name (str): The name of the GitHub repository.
             repo_url (str): The url of the GitHub repository.
             issue_id (int): The number of the GitHub issue to work on.
+            model_name (str): The name of the LLM model.
         """
         print(f"Coding Agent started for issue #{issue_id} in '{repo_name}'.")
 
@@ -66,10 +67,14 @@ class Beaker:
             cmd = [
                 "sweagent",
                 "run",
+                "--agent.model.name",
+                model_name,
                 "--env.repo.github_url",
                 repo_url,
-                "--env.repo.issue_id",
-                str(issue_id),
+                "--problem-statement.url",
+                f"{repo_url}/issues/{str(issue_id)}",
+                "--problem-statement.type",
+                "github_issue"
             ]
 
             # Copy the environment variables containing the
