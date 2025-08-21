@@ -39,6 +39,7 @@ jobs:
       BUNSEN_GITHUB_PRIVATE_KEY: ${{ secrets.BUNSEN_GITHUB_PRIVATE_KEY }}
       BUNSEN_GITHUB_WEBHOOK_SECRET: ${{ secrets.BUNSEN_GITHUB_WEBHOOK_SECRET }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      LITELLM_DROP_PARAMS: True  # Required if using a non-reasoning model
 
     steps:
 
