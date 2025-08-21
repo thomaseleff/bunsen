@@ -71,10 +71,8 @@ class Beaker:
                 model_name,
                 "--env.repo.github_url",
                 repo_url,
-                "--problem-statement.url",
+                "--problem_statement.github_url",
                 f"{repo_url}/issues/{str(issue_id)}",
-                "--problem-statement.type",
-                "github_issue"
             ]
 
             # Copy the environment variables containing the
