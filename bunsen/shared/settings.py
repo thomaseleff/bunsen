@@ -21,9 +21,9 @@ dotenv.load_dotenv()
 SETTINGS = yaml_utils.load_yaml_file(DEFAULT_SETTINGS_PATH)
 
 # Constants
-GITHUB_APP_ID = os.getenv("GITHUB_APP_ID")
-GITHUB_PRIVATE_KEY = os.getenv("GITHUB_PRIVATE_KEY")
-GITHUB_WEBHOOK_SECRET = os.getenv("GITHUB_WEBHOOK_SECRET")
+GITHUB_APP_ID = os.getenv("BUNSEN_GITHUB_APP_ID")
+GITHUB_PRIVATE_KEY = os.getenv("BUNSEN_GITHUB_PRIVATE_KEY")
+GITHUB_WEBHOOK_SECRET = os.getenv("BUNSEN_GITHUB_WEBHOOK_SECRET")
 GITHUB_REPO_URL = SETTINGS.get("github", {}).get("repo_url")
 GITHUB_MAIN_BRANCH = SETTINGS.get("github", {}).get("main_branch")
 GITHUB_CODING_TRIGGER_LABEL = SETTINGS.get("github", {}).get("coding_trigger_label")
@@ -34,9 +34,9 @@ BEAKER_MODEL_NAME = SETTINGS.get("llm", {}).get("beaker_model_name")
 
 # Construct a dictionary of constants
 _constants = {
-    "env > GITHUB_APP_ID": GITHUB_APP_ID,
-    "env > GITHUB_PRIVATE_KEY": GITHUB_PRIVATE_KEY,
-    "env > GITHUB_WEBHOOK_SECRET": GITHUB_WEBHOOK_SECRET,
+    "env > BUNSEN_GITHUB_APP_ID": GITHUB_APP_ID,
+    "env > BUNSEN_GITHUB_PRIVATE_KEY": GITHUB_PRIVATE_KEY,
+    "env > BUNSEN_GITHUB_WEBHOOK_SECRET": GITHUB_WEBHOOK_SECRET,
     "settings > github > repo_url": GITHUB_REPO_URL,
     "settings > github > main_branch": GITHUB_MAIN_BRANCH,
     "settings > github > coding_trigger_label": GITHUB_CODING_TRIGGER_LABEL,
