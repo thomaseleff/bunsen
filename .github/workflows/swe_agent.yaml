@@ -74,5 +74,5 @@ jobs:
 
       # Run the Coding Agent
       - name: Run swe-agent
-        run: python -m bunsen.swe_agent.agent --repo_name ${{ github.event.inputs.repo_name}} --installation_id ${{ github.event.inputs.installation_id}} --issue_id ${{ github.event.inputs.issue_id }}
+        run: cd ./bunsen && python -m bunsen.swe_agent.agent --repo_name ${{ github.event.inputs.repo_name}} --installation_id ${{ github.event.inputs.installation_id}} --issue_id ${{ github.event.inputs.issue_id }}
 
