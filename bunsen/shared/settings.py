@@ -32,8 +32,9 @@ GITHUB_CODING_WORKFLOW_FILENAME = SETTINGS.get("github", {}).get("coding_workflo
 BUNSEN_MODEL_NAME = SETTINGS.get("llm", {}).get("bunsen_model_name")
 BEAKER_MODEL_NAME = SETTINGS.get("llm", {}).get("beaker_model_name")
 
-if not all(
-    [
+# Identify missing constants
+missing_constants = [
+    constant for constant in [
         GITHUB_APP_ID,
         GITHUB_PRIVATE_KEY,
         GITHUB_WEBHOOK_SECRET,
@@ -43,9 +44,11 @@ if not all(
         BUNSEN_MODEL_NAME,
         BEAKER_MODEL_NAME,
         GITHUB_CODING_WORKFLOW_FILENAME
-    ]
-):
+    ] if not constant
+]
+
+if missing_constants:
     raise EnvironmentError(
-        "Missing one or more required environment variables"
-        " or settings from `settings.yaml`."
+        "The following required environment variables"
+        f" or settings from `settings.yaml` are missing: [{', '.join(missing_constants)}]."
     )
