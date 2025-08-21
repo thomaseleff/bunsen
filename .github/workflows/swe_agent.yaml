@@ -71,7 +71,7 @@ jobs:
       # Install swe-agent
       - name: Install swe-agent
         run: |
-          pip install ./swe-agent
+          pip install --editable ./swe-agent
 
       # Install bunsen
       - name: Install bunsen
