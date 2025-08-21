@@ -6,6 +6,12 @@ import litellm
 from bunsen.shared import settings
 
 
+# Configure litellm
+#   Unsupported parameters will be dropped from the completion request
+
+litellm.drop_params = True
+
+
 def chat(model: str, messages: list[dict]) -> Any:
     """Send a chat/completion request using litellm.
 
