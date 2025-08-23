@@ -99,7 +99,7 @@ To integrate 🧪 `bunsen` into your workflow, you'll primarily interact with Gi
 5.  **Create a Github App and set up GitHub webhooks**
     Create a Github App and configure a webhook to your deployed Bunsen `issue-agent` FastAPI application (e.g., `https://your-server.com/github-webhook`).
     
-    Enable `Actions` (as 'Read and write'), `Contents` (as 'Read-only), and `Issues` (as 'Read and write') within the **Repository permissions**.
+    Enable `Actions` (as 'Read and write'), `Contents` (as 'Read and write), `Issues` (as 'Read and write'), and `Pull requests` (as Read and write) within the **Repository permissions**.
     
     Subscribe to the `Issues`, `Issue comment`, and `Label` events.
 
