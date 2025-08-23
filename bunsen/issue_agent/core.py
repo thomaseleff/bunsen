@@ -315,7 +315,7 @@ class Bunsen:
         if llm_response:
 
             # Get the issue participants
-            primary, _, _, participants = self._get_issue_participants(
+            primary, _, _, participants = self._get_issue_team_members(
                 issue=issue,
                 comments=comments,
             )
