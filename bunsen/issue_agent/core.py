@@ -180,7 +180,7 @@ class Bunsen:
         # Remove the issue-athor and primary commenter from the commenters
         #   and participants to avoid duplicate mentions
 
-        for participant in [author, primary]:
+        for participant in list(set([author, primary])):
             if participant:
                 commenters.remove(participant)
                 participants.remove(participant)
