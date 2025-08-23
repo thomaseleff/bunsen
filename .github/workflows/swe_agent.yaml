@@ -38,8 +38,8 @@ jobs:
       BUNSEN_GITHUB_APP_ID: ${{ secrets.BUNSEN_GITHUB_APP_ID }}
       BUNSEN_GITHUB_PRIVATE_KEY: ${{ secrets.BUNSEN_GITHUB_PRIVATE_KEY }}
       BUNSEN_GITHUB_WEBHOOK_SECRET: ${{ secrets.BUNSEN_GITHUB_WEBHOOK_SECRET }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      LITELLM_DROP_PARAMS: True  # Required if using a non-reasoning model
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      LITELLM_DROP_PARAMS: True  # Usually required, depends on the supported model parameters
 
     steps:
 
@@ -54,6 +54,7 @@ jobs:
       - name: Checkout swe-agent
         uses: actions/checkout@v4
         with:
+          ref: v1.1.0  # Reference a release tag
           repository: SWE-agent/SWE-agent
           path: swe-agent
 
@@ -69,15 +70,17 @@ jobs:
         run: |
           python -m pip install --upgrade pip
 
+      # Install bunsen
+      #  Ensures all named version dependencies are met
+
+      - name: Install bunsen
+        run: |
+          pip install ./bunsen
+
       # Install swe-agent
       - name: Install swe-agent
         run: |
           pip install --editable ./swe-agent && pip install google-cloud-aiplatform
-
-      # Install bunsen
-      - name: Install bunsen
-        run: |
-          pip install ./bunsen
 
       # Run the Coding Agent
       - name: Run swe-agent

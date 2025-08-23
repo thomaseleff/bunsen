@@ -19,3 +19,17 @@ def load_yaml_file(file_path: str) -> dict:
     except FileNotFoundError:
         print(f"Warning: Configuration file not found at '{file_path}'.")
         return {}
+
+
+def dump_yaml_file(file_path: str, data: dict):
+    """Saves a dictionary to a YAML file at a given path.
+
+    Args:
+        file_path (str): The full path to the YAML file.
+        data (dict): The dictionary to be saved as YAML.
+    """
+    try:
+        with open(file_path, "w") as f:
+            yaml.safe_dump(data, f, indent=2)
+    except Exception as e:
+        print(f"Error writing to file '{file_path}': {e}")

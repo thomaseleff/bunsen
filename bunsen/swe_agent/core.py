@@ -1,11 +1,13 @@
 """Beaker swe-agent runner"""
 
-import os
 from github import GithubException
+import json
+import os
+from pathlib import Path
+import re
 import subprocess
 
-from bunsen.shared import github
-from bunsen.swe_agent import prompts
+from bunsen.shared import github, settings
 
 
 class Beaker:
@@ -29,6 +31,28 @@ class Beaker:
             installation_id=installation_id,
         )
 
+    def _parse_trajectory_location(stdout) -> str:
+        """Parses the trajectory file location from swe-agent.
+
+        Args:
+            stdout (str): The standard-output from the swe-agent.
+
+        Returns:
+            str: The trajectory file output location.
+        """
+
+        # Define a regex pattern to match the trajectory file path
+        pattern = r"Trajectory will be saved to(.*?)\.traj"
+
+        # Search for the pattern in the output
+        match = re.search(pattern, stdout, re.DOTALL)
+
+        if match:
+            trajectory_path = match.group(1)
+            return str(trajectory_path).strip() + ".traj"
+        else:
+            return None
+
     def dispatch(self, repo_name: str, repo_url: str, issue_id: int, model_name: str):
         """The main entry point for the Beaker swe-agent.
 
@@ -43,30 +67,16 @@ class Beaker:
             issue_id (int): The number of the GitHub issue to work on.
             model_name (str): The name of the LLM model.
         """
-        print(f"Coding Agent started for issue #{issue_id} in '{repo_name}'.")
+        print(f"Beaker (swe-agent) started working on issue #{issue_id} in repository '{repo_name}'.")
 
         try:
-
-            # Retrieve the issue
-            issue = self.github_client.get_issue(repo_name=repo_name, issue_id=issue_id)
-            issue_title: str = issue.title
-            issue_body: str = issue.body
-
-            # Build the prompt for the LLM
-            llm_plan: str = prompts.get_issue_plan_prompt(
-                issue_title=issue_title,
-                issue_body=issue_body,
-            )
-            self.github_client.post_comment(
-                repo_name=repo_name,
-                issue_id=issue_id,
-                comment_body=f"I've started working on this issue. Here is my plan:\n\n{llm_plan}",
-            )
 
             # Construct the command to run the Beaker swe-agent
             cmd = [
                 "sweagent",
                 "run",
+                "--config",
+                settings.DEFAULT_SWE_AGENT_SETTINGS_PATH,
                 "--agent.model.name",
                 model_name,
                 "--env.repo.github_url",
@@ -83,7 +93,6 @@ class Beaker:
             env = os.environ.copy()
 
             # Run the beaker swe-agent
-            print("Running the Beaker swe-agent.")
             result = subprocess.run(
                 cmd,
                 cwd=os.getcwd(),  # The subprocess will run from the current working directory
@@ -99,14 +108,48 @@ class Beaker:
             print("SWE-agent stderr:")
             print(result.stderr)
 
-            print("The Beaker swe-agent finished successfully.")
+            # Handle run-time errors
+            if result.returncode != 0:
+                raise RuntimeError(
+                    f"    Command      : {' '.join(cmd)}\n"
+                    f"    Exit-code    : {result.returncode}\n"
+                    f"    Error-output : {result.stderr.strip()}"
+                )
 
-            # Update the issue with the result
-            self.github_client.post_comment(
-                repo_name=repo_name,
-                issue_id=issue_id,
-                comment_body="I have successfully submitted a pull request to resolve this issue. Please review the changes."
-            )
+            # Retrieve the trajectory file
+            trajectory_path = self._parse_trajectory_location(stdout=result.stdout)
+
+            # Load the trajectory file
+            if Path(trajectory_path).exists():
+                with open(trajectory_path, "r") as f:
+                    trajectory = json.load(f)
+
+                # Retrieve the status
+                submitted = trajectory.get("info", {}).get("submission", False)
+                status = trajectory.get("info", {}).get("exit_status", False)
+                stats = trajectory.get("info", {}).get("model_stats")
+
+                self.github_client.post_comment(
+                    repo_name=repo_name,
+                    issue_id=issue_id,
+                    comment_body=(
+                        "Beaker (swe-agent) finished working on the issue.\n\n"
+                        "```\n"
+                        f"    Status    : '{status}'\n"
+                        f"    Submitted : {submitted}\n"
+                        f"    Stats     : {json.dumps(stats, indent=2)}\n"
+                        "```\n"
+                    )
+                )
+
+            else:
+                raise Exception(
+                    "    Status    : 'Unknown Error'\n"
+                    "    Submitted : False\n"
+                    "    Stats     : None"
+                )
+
+            print("Beaker (swe-agent) finished working on issue #{issue_id} in repository '{repo_name}'.")
 
         except subprocess.CalledProcessError as e:
             print(f"SWE-agent CLI error: {e}")
@@ -117,19 +160,28 @@ class Beaker:
             self.github_client.post_comment(
                 repo_name=repo_name,
                 issue_id=issue_id,
-                comment_body=f"I encountered a `swe-agent` CLI error while trying to fix this issue: {e}"
+                comment_body=(
+                    "Beaker (swe-agent) encountered an `swe-agent` CLI error while trying to resolve the issue."
+                    f"\n\n```\n{e}\n```\n"
+                )
             )
         except GithubException as e:
             print(f"GitHub API error: {e}")
             self.github_client.post_comment(
                 repo_name=repo_name,
                 issue_id=issue_id,
-                comment_body=f"I encountered a GitHub API error while trying to fix this issue: {e}"
+                comment_body=(
+                    "Beaker (swe-agent) encountered a GitHub API error while trying to resolve the issue."
+                    f"\n\n```\n{e}\n```\n"
+                )
             )
         except Exception as e:
-            print(f"An unexpected error occurred during the coding agent run: {e}")
+            print(f"An unexpected error occurred: {e}")
             self.github_client.post_comment(
                 repo_name=repo_name,
                 issue_id=issue_id,
-                comment_body=f"I encountered an unexpected error while trying to fix this issue: {e}"
+                comment_body=(
+                    "Beaker (swe-agent) encountered an unexpected error while trying to resolve the issue."
+                    f"\n\n```\n{e}\n```\n"
+                )
             )

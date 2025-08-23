@@ -161,10 +161,13 @@ class Client:
                 input=data
             )
 
-            print(f"Successfully triggered workflow '{workflow_filename}' for issue #{issue_id}")
+            print(f"Successfully triggered workflow '{workflow_filename}' for issue #{issue_id} in repository `{repo_name}`")
 
         except Exception as e:
-            print(f"An error occurred while triggering the workflow: {e}")
+            print(
+                f"An error occurred while triggering workflow '{workflow_filename}'"
+                f" for issue #{issue_id} in repository `{repo_name}`: {e}"
+            )
 
     def get_repository_content(
         self, repo_name: str, path: str, branch: str = "main"

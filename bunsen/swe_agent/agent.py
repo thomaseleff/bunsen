@@ -4,7 +4,7 @@ import argparse
 import sys
 
 from bunsen.shared import settings
-from bunsen.swe_agent import runner
+from bunsen.swe_agent import core
 
 
 def main():
@@ -23,7 +23,7 @@ def main():
     try:
 
         # Initialize the Beaker swe-agent
-        beaker = runner.Beaker(
+        beaker = core.Beaker(
             app_id=settings.GITHUB_APP_ID,
             private_key=settings.GITHUB_PRIVATE_KEY,
             installation_id=args.installation_id,

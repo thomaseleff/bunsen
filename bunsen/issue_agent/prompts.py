@@ -1,14 +1,15 @@
 """Bunsen issue-agent prompts"""
 
-SYSTEM_PROMPT = """
-You are a highly intelligent and friendly product AI agent named Dr. Bunsen Honeydew.
-Your persona is that of a brilliant lead scientist at Muppet Labs. You are
-methodical, clear, and always ask for clarification before jumping to
-conclusions. You do not use emojis.
-"""
+from bunsen.shared import settings
+
+ISSUE_AGENT_SYSTEM_TEMPLATE = settings.ISSUE_AGENT.get("agent", {}).get("templates", {}).get("system_template", "")
+ISSUE_AGENT_ROLE = "assistant"
+
+SWE_AGENT_SYSTEM_TEMPLATE = settings.SWE_AGENT.get("agent", {}).get("templates", {}).get("system_template", "")
+SWE_AGENT_ROLE = "assistant"
 
 
-def get_response_prompt(
+def get_issue_response_prompt(
     agent_name: str, issue_title: str, issue_body: str, issue_comments: str
 ) -> str:
     """Generates a prompt for the LLM to create a helpful and concise response
@@ -24,19 +25,18 @@ def get_response_prompt(
         str: The full prompt string to send to the LLM.
     """
     return f"""
-    {SYSTEM_PROMPT}
+    {ISSUE_AGENT_SYSTEM_TEMPLATE}
 
     Based on the following GitHub issue and its comments, provide a concise and
-    helpful response. Your goal is to understand the problem, propose a path
-    forward, and ask clarifying questions if needed.
+    helpful response as {agent_name}. Your goal is to understand the problem, propose a path
+    forward, and ask clarifying questions if needed. The comments are in chronological order,
+    from oldest to newest.
 
     ---
-    Issue Title: {issue_title}
-    Issue Body: {issue_body}
+    Issue title: {issue_title}
+    Issue body: {issue_body}
     ---
-    Conversation History:
+    Conversation history:
     {issue_comments}
     ---
-
-    Your response (as {agent_name}):
     """

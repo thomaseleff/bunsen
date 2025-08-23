@@ -7,7 +7,7 @@ from bunsen.shared import settings
 
 
 # Configure litellm
-#   Unsupported parameters will be dropped from the completion request
+#   Unsupported parameters will be dropped from the chat/completion request
 
 litellm.drop_params = True
 
