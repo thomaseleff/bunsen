@@ -1,5 +1,5 @@
 # Set the operating-system
-FROM python:3.12-slim
+FROM python:3.12-slim AS base
 
 # Set the working directory
 WORKDIR /bunsen
@@ -11,6 +11,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Clone the repository
+
+# Run `docker build --no-cache-filter clone .` to always ensure the
+#   remote repository is re-cloned when the image is rebuilt
+
+FROM base AS clone
 RUN git clone https://github.com/thomaseleff/bunsen.git /bunsen
 
 # Install Python dependencies
