@@ -130,7 +130,7 @@ class Bunsen:
         """
 
         # Define the regex pattern to search for GitHub usernames (e.g., @username)
-        pattern = r'@(\w+)'
+        pattern = r'@([a-zA-Z0-9\-_]+)'
 
         # Search in the issue body
         issue_participants = re.findall(pattern, issue.body)
@@ -142,7 +142,7 @@ class Bunsen:
                 comment_participants.extend(re.findall(pattern, comment.body))
 
         # Retain a unique list of issue participants
-        participants = set(issue_participants + comment_participants)
+        participants = list(set(issue_participants + comment_participants))
 
         # Remove the agent-name
         if self.agent_name in participants:
@@ -182,10 +182,12 @@ class Bunsen:
 
         for participant in list(set([author, primary])):
             if participant:
-                commenters.remove(participant)
-                participants.remove(participant)
+                if participant in commenters:
+                    commenters.remove(participant)
+                if participant in participants:
+                    participants.remove(participant)
 
-        return tuple(
+        return (
             primary if primary else author,
             author,
             commenters,
