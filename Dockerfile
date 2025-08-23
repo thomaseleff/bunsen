@@ -10,8 +10,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy project files
-COPY . /bunsen
+# Clone the repository
+RUN git clone https://github.com/thomaseleff/bunsen.git /bunsen
 
 # Install Python dependencies
 RUN python -m pip install --upgrade pip
