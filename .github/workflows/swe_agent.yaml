@@ -84,7 +84,7 @@ jobs:
       # Install swe-agent
       - name: Install swe-agent
         run: |
-          pip install --editable ./swe-agent && pip install google-cloud-aiplatform
+          pip install --editable ./swe-agent
 
       # Run the Coding Agent
       - name: Run swe-agent
