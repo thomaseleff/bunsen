@@ -124,9 +124,12 @@ class Beaker:
             # Handle run-time errors
             if result.returncode != 0:
                 raise RuntimeError(
-                    f"- Command      : {' '.join(cmd)}\n"
-                    f"- Exit-code    : {result.returncode}\n"
-                    f"- Error-output : {result.stderr.strip()}"
+                    f"- Command : `{' '.join(cmd)}`\n"
+                    f"- Exit-code : {result.returncode}\n"
+                    "- Error-output : \n\n"
+                    "```\n"
+                    f"{result.stderr.strip()}\n"
+                    "```\n"
                 )
 
             # Retrieve the trajectory file
@@ -150,9 +153,12 @@ class Beaker:
                     issue_id=issue_id,
                     comment_body=(
                         "beaker-swe-agent finished working on the issue.\n\n"
-                        f"- Status : '{status}'\n"
-                        f"- Stats  : \n\n{json.dumps(stats, indent=2)}\n"
-                        f"- Patch  : '{patch_path}'\n\n"
+                        f"- Status : `{status}`\n"
+                        "- Stats : \n\n"
+                        "```\n"
+                        f"{json.dumps(stats, indent=4)}\n"
+                        "```\n"
+                        f"- Patch : `{patch_path}`\n\n"
                         "**Patch (diff)**\n\n"
                         "```\n"
                         f"{patch}\n"
@@ -196,10 +202,10 @@ class Beaker:
 
             # Retrieve the exception information
             exception = (
-                f"- Filename    : {inspect.trace()[-1][1]}\n"
+                f"- Filename : {inspect.trace()[-1][1]}\n"
                 f"- Line Number : Line {inspect.trace()[-1][2]}\n"
-                f"- Function    : `{inspect.trace()[-1][3]}()`\n"
-                f"- Exception   : {type(e).__name__}\n"
+                f"- Function : `{inspect.trace()[-1][3]}()`\n"
+                f"- Exception : `{type(e).__name__}`\n"
             )
 
             print(f"An unexpected error occurred:\n\n{type(e).__name__}: {e}")
