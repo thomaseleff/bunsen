@@ -34,6 +34,14 @@ def root():
     return "The Bunsen issue-agent is running!"
 
 
+@app.get("/health")
+@app.get("/healthcheck")
+def health():
+    """Health endpoint to confirm the application is healthy."""
+    return {"status": "ok"}
+
+
+
 @app.post("/github-webhook")
 async def github_webhook(request: Request):
     """Endpoint to receive and process GitHub webhook events.
