@@ -98,8 +98,8 @@ jobs:
         working-directory: ./bunsen
         env:
           PATCH_FILE: ${{ steps.swe_task.outputs.patch_path }}
-          ISSUE_TITLE: ${{ format('Resolves #{}', github.event.inputs.issue_id) }}
-          BRANCH_NAME: ${{ format('beaker-swe-agent-issue-#{}', github.event.inputs.issue_id) }}
+          ISSUE_TITLE: ${{ 'beaker-swe-agent-issue-#' }}${{ github.event.inputs.issue_id }}
+          BRANCH_NAME: ${{ 'beaker-swe-agent-issue-#' }}${{ github.event.inputs.issue_id }}
         if: ${{ steps.swe_task.outputs.exit_status == 'submitted' }}
         run: |
 
@@ -123,8 +123,8 @@ jobs:
         uses: actions/github-script@v6
         if: ${{ steps.swe_task.outputs.exit_status == 'submitted' }}
         env:
-          ISSUE_TITLE: ${{ format('Issue #{} (beaker-swe-agent)', github.event.inputs.issue_id) }}
-          BRANCH_NAME: ${{ format('beaker-swe-agent-issue-#{}', github.event.inputs.issue_id) }}
+          ISSUE_TITLE: ${{ 'beaker-swe-agent-issue-#' }}${{ github.event.inputs.issue_id }}
+          BRANCH_NAME: ${{ 'beaker-swe-agent-issue-#' }}${{ github.event.inputs.issue_id }}
         with:
           script: |
             const issueUrl = 'https://github.com/${{ github.repository }}/issues/${{ github.event.inputs.issue_id }}';
