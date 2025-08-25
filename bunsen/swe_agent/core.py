@@ -31,7 +31,7 @@ class Beaker:
             installation_id=installation_id,
         )
 
-    def _parse_trajectory_location(stdout) -> str:
+    def _parse_trajectory_location(self, stdout) -> str:
         """Parses the trajectory file location from swe-agent.
 
         Args:
@@ -83,8 +83,6 @@ class Beaker:
                 repo_url,
                 "--problem_statement.github_url",
                 f"{repo_url}/issues/{str(issue_id)}",
-                "--actions.open_pr",
-                "True",
             ]
 
             # Copy the environment variables containing the
@@ -98,7 +96,6 @@ class Beaker:
                 cwd=os.getcwd(),  # The subprocess will run from the current working directory
                 capture_output=True,
                 text=True,
-                check=True,  # Raise an exception if the command returns a non-zero exit code
                 env=env
             )
 
@@ -129,6 +126,9 @@ class Beaker:
                 status = trajectory.get("info", {}).get("exit_status", False)
                 stats = trajectory.get("info", {}).get("model_stats")
 
+                # Retrieve the patch
+                patch_path = str(Path(trajectory_path).with_suffix('.patch'))
+
                 self.github_client.post_comment(
                     repo_name=repo_name,
                     issue_id=issue_id,
@@ -142,6 +142,10 @@ class Beaker:
                     )
                 )
 
+                # Set output
+                print(f"::set-output name=patch_path::{patch_path}")
+                print(f"::set-output name=exit_status::{status}")
+
             else:
                 raise Exception(
                     "    Status    : 'Unknown Error'\n"
@@ -149,7 +153,7 @@ class Beaker:
                     "    Stats     : None"
                 )
 
-            print("Beaker (swe-agent) finished working on issue #{issue_id} in repository '{repo_name}'.")
+            print(f"Beaker (swe-agent) finished working on issue #{issue_id} in repository '{repo_name}'.")
 
         except subprocess.CalledProcessError as e:
             print(f"SWE-agent CLI error: {e}")

@@ -322,8 +322,13 @@ class Bunsen:
                 comments=comments,
             )
 
+            # Construct the comment, cc'ing the issue-participants
+            comment_body = f"@{primary}\n\n{llm_response}"
+
+            if participants:
+                comment_body = + f"\n\ncc {', '.join([f'@{p}' for p in participants])}"
+
             # Post the response as a comment on the issue
-            comment_body = f"@{primary}\n\n{llm_response}\n\ncc {", ".join([f"@{p}" for p in participants])}"
             self.github_client.post_comment(
                 repo_name=repo_name,
                 issue_id=issue_id,

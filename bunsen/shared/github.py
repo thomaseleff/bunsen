@@ -34,6 +34,7 @@ class Client:
 
             # Retain the installation ID and token for API requests
             self.installation_id = installation_id
+            self.token = app_installation_auth.token
 
             # Retain the Github App name
             self.user = self.identity.get_app().name
