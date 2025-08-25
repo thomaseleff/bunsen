@@ -1,0 +1,2280 @@
+2025-08-25 18:32:35,082 - INFO - swea-run - Starting environment
+2025-08-25 18:32:35,150 - INFO - rex-deploy - Pulling image 'python:3.11'
+2025-08-25 18:32:53,740 - INFO - rex-deploy - Building image python:3.11 to install a standalone python to /root. This might take a while (but you only have to do it once). To skip this step, set `python_standalone_dir` to None.
+2025-08-25 18:35:03,414 - DEBUG - free_port - Found free port 49685
+2025-08-25 18:35:03,415 - INFO - rex-deploy - Starting container python3.11-8c6637df-159d-4ac6-990c-cd6368aa9ad2 with image python:3.11 serving on port 49685
+2025-08-25 18:35:03,416 - DEBUG - rex-deploy - Command: "docker run --rm -p 49685:8000 --name python3.11-8c6637df-159d-4ac6-990c-cd6368aa9ad2 sha256:19101e03c02548aa629277c125e4e82d670f63394ccf7bd326986bfcb9e50782 /bin/sh -c '/root/python3.11/bin/swerex-remote --auth-token bf96b6d8-58a9-4482-bf1e-61f33ed27268'"
+2025-08-25 18:35:03,417 - INFO - rex-deploy - Starting runtime at 49685
+2025-08-25 18:35:04,480 - INFO - rex-deploy - Runtime started in 1.06s
+2025-08-25 18:35:05,252 - INFO - swea-env - Environment Initialized
+2025-08-25 18:35:05,995 - DEBUG - swea-env - Resetting repository thomaseleff__bunsen to commit HEAD
+2025-08-25 18:35:06,434 - INFO - swea-run - Running agent
+2025-08-25 18:35:06,443 - INFO - swea-agent - Setting up agent for instance thomaseleff__bunsen-i3
+2025-08-25 18:35:06,444 - INFO - swea-agent - Trajectory will be saved to /home/runner/work/bunsen/bunsen/bunsen/trajectories/runner/swe_agent__openai/o4-mini__t-1.00__p-1.00__c-3.00___thomaseleff__bunsen-i3/thomaseleff__bunsen-i3/thomaseleff__bunsen-i3.traj
+2025-08-25 18:35:06,661 - DEBUG - rex-runtime - Uploading file from /home/runner/work/bunsen/bunsen/swe-agent/tools/registry to /root/tools/registry
+2025-08-25 18:35:06,663 - DEBUG - rex-runtime - Created zip file at /tmp/tmpeu16e12g/zipped_transfer.zip
+2025-08-25 18:35:06,664 - DEBUG - rex-runtime - Uploading file from /home/runner/work/bunsen/bunsen/swe-agent/tools/edit_anthropic to /root/tools/edit_anthropic
+2025-08-25 18:35:06,667 - DEBUG - rex-runtime - Created zip file at /tmp/tmpjr03k3gk/zipped_transfer.zip
+2025-08-25 18:35:06,668 - DEBUG - rex-runtime - Uploading file from /home/runner/work/bunsen/bunsen/swe-agent/tools/review_on_submit_m to /root/tools/review_on_submit_m
+2025-08-25 18:35:06,669 - DEBUG - rex-runtime - Created zip file at /tmp/tmpzlkcreu5/zipped_transfer.zip
+2025-08-25 18:35:09,958 - INFO - swea-tools - Resetting tools
+2025-08-25 18:35:10,842 - INFO - swea-agent - SYSTEM (main)
+You are a helpful assistant that can interact with a computer to solve tasks.
+2025-08-25 18:35:10,981 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:35:11,249 - INFO - swea-agent - 🤖 MODEL INPUT
+<uploaded_files>
+/thomaseleff__bunsen
+</uploaded_files>
+I've uploaded a python code repository in the directory /thomaseleff__bunsen. Consider the following PR description:
+
+<pr_description>
+Add a healthcheck endpoint
+**To Do**:
+- Add a healthcheck endpoint to the `bunsen.issue_agent.agent` FastAPI application
+
+</pr_description>
+
+Can you help me implement the necessary changes to the repository so that the requirements specified in the <pr_description> are met?
+I've already taken care of all changes to any of the test files described in the <pr_description>. This means you DON'T have to modify the testing logic or any of the tests in any way!
+Your task is to make the minimal changes to non-tests files in the /thomaseleff__bunsen directory to ensure the <pr_description> is satisfied.
+Follow these steps to resolve the issue:
+1. As a first step, it might be a good idea to find and read code relevant to the <pr_description>
+2. Create a script to reproduce the error and execute it with `python <filename.py>` using the bash tool, to confirm the error
+3. Edit the sourcecode of the repo to resolve the issue
+4. Rerun your reproduce script and confirm that the error is fixed!
+5. Think about edgecases and make sure your fix handles them as well
+Your thinking should be thorough and so it's fine if it's very long.
+2025-08-25 18:35:11,253 - INFO - swea-agent - ========================= STEP 1 =========================
+2025-08-25 18:35:11,254 - DEBUG - swea-lm - n_cache_control: 1
+2025-08-25 18:35:11,256 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:35:14,076 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WK74Xpv60jyUBU8FzkFTPXEsqxb', created=1756146911, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"view","path":"/thomaseleff__bunsen","view_range":[1,200]}', name='str_replace_editor'), id='call_uraU1IqgcCvMZ08RTQw9JeRZ', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=108, prompt_tokens=913, total_tokens=1021, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=64, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=0, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:35:14,079 - DEBUG - swea-lm - input_tokens=335, output_tokens=0, instance_cost=0.00, cost=0.00
+2025-08-25 18:35:14,080 - DEBUG - swea-lm - total_tokens_sent=335, total_tokens_received=0, total_cost=0.00, total_api_calls=1
+2025-08-25 18:35:14,091 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+str_replace_editor view /thomaseleff__bunsen  --view_range 1 200
+2025-08-25 18:35:14,386 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:35:14,680 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+The `view_range` parameter is not allowed when `path` points to a directory.
+
+2025-08-25 18:35:14,682 - INFO - swea-agent - ========================= STEP 2 =========================
+2025-08-25 18:35:14,683 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:35:14,684 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:35:17,728 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WKBdEhQoAfaU452eVYHFLwl2mBH', created=1756146915, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"ls -R /thomaseleff__bunsen"}', name='bash'), id='call_hZ5YFt4iShlrXudtLN8O8wj8', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=163, prompt_tokens=985, total_tokens=1148, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=128, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=0, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:35:17,733 - DEBUG - swea-lm - input_tokens=409, output_tokens=0, instance_cost=0.00, cost=0.00
+2025-08-25 18:35:17,733 - DEBUG - swea-lm - total_tokens_sent=744, total_tokens_received=0, total_cost=0.00, total_api_calls=2
+2025-08-25 18:35:17,735 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+ls -R /thomaseleff__bunsen
+2025-08-25 18:35:17,982 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:35:18,262 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+/thomaseleff__bunsen:
+Dockerfile  bunsen		pyproject.toml	      setup.cfg
+LICENSE     coverage		requirements.txt
+README.md   docker-compose.yml	requirements_dev.txt
+
+/thomaseleff__bunsen/bunsen:
+__init__.py  issue_agent  shared  swe_agent
+
+/thomaseleff__bunsen/bunsen/issue_agent:
+__init__.py  agent.py  core.py	prompts.py
+
+/thomaseleff__bunsen/bunsen/shared:
+__init__.py  github.py	llms.py  settings.py  yaml_utils.py
+
+/thomaseleff__bunsen/bunsen/swe_agent:
+__init__.py  agent.py  core.py
+
+/thomaseleff__bunsen/coverage:
+COVERAGE.md
+
+2025-08-25 18:35:18,264 - INFO - swea-agent - ========================= STEP 3 =========================
+2025-08-25 18:35:18,265 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:35:18,266 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:35:22,252 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WKEZoC8th7gwwsCSpHlUGNF5quT', created=1756146918, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"view","path":"/thomaseleff__bunsen/bunsen/issue_agent/agent.py","view_range":[1,200]}', name='str_replace_editor'), id='call_Bm9vAQOREcgj5AwhqtKTiWJX', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=245, prompt_tokens=1205, total_tokens=1450, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=192, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=0, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:35:22,257 - DEBUG - swea-lm - input_tokens=637, output_tokens=0, instance_cost=0.01, cost=0.00
+2025-08-25 18:35:22,257 - DEBUG - swea-lm - total_tokens_sent=1,381, total_tokens_received=0, total_cost=0.01, total_api_calls=3
+2025-08-25 18:35:22,259 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+str_replace_editor view /thomaseleff__bunsen/bunsen/issue_agent/agent.py  --view_range 1 200
+2025-08-25 18:35:22,553 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:35:22,891 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+Invalid `view_range`: [1, 200]. Its second element `200` should be smaller than the number of lines in the file: `130`
+
+2025-08-25 18:35:22,893 - INFO - swea-agent - ========================= STEP 4 =========================
+2025-08-25 18:35:22,894 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:35:22,895 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:35:26,875 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WKJhLdjVmWBgl8MfzC2mvG1TqSd', created=1756146923, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"grep -R \\"health\\" -n /thomaseleff__bunsen"}', name='bash'), id='call_GvvWKh5Ax9xmyGCqhPoNS6x1', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=232, prompt_tokens=1300, total_tokens=1532, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=192, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=0, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:35:26,880 - DEBUG - swea-lm - input_tokens=733, output_tokens=0, instance_cost=0.01, cost=0.00
+2025-08-25 18:35:26,881 - DEBUG - swea-lm - total_tokens_sent=2,114, total_tokens_received=0, total_cost=0.01, total_api_calls=4
+2025-08-25 18:35:26,882 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+grep -R "health" -n /thomaseleff__bunsen
+2025-08-25 18:35:27,133 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:35:27,403 - INFO - swea-agent - 🤖 MODEL INPUT
+Your command ran successfully and did not produce any output.
+2025-08-25 18:35:27,405 - INFO - swea-agent - ========================= STEP 5 =========================
+2025-08-25 18:35:27,406 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:35:27,408 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:35:32,529 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WKNKHHG8akn8zxOVsdnNIC5fFmo', created=1756146927, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"ls -R /thomaseleff__bunsen"}', name='bash'), id='call_dtwJSEZqYsoM3zyFdwN66SGa', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=297, prompt_tokens=1355, total_tokens=1652, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=256, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=1280, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:35:32,533 - DEBUG - swea-lm - input_tokens=791, output_tokens=0, instance_cost=0.01, cost=0.00
+2025-08-25 18:35:32,534 - DEBUG - swea-lm - total_tokens_sent=2,905, total_tokens_received=0, total_cost=0.01, total_api_calls=5
+2025-08-25 18:35:32,535 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+ls -R /thomaseleff__bunsen
+2025-08-25 18:35:32,782 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:35:33,534 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+/thomaseleff__bunsen:
+Dockerfile  bunsen		pyproject.toml	      setup.cfg
+LICENSE     coverage		requirements.txt
+README.md   docker-compose.yml	requirements_dev.txt
+
+/thomaseleff__bunsen/bunsen:
+__init__.py  issue_agent  shared  swe_agent
+
+/thomaseleff__bunsen/bunsen/issue_agent:
+__init__.py  agent.py  core.py	prompts.py
+
+/thomaseleff__bunsen/bunsen/shared:
+__init__.py  github.py	llms.py  settings.py  yaml_utils.py
+
+/thomaseleff__bunsen/bunsen/swe_agent:
+__init__.py  agent.py  core.py
+
+/thomaseleff__bunsen/coverage:
+COVERAGE.md
+
+2025-08-25 18:35:33,536 - INFO - swea-agent - ========================= STEP 6 =========================
+2025-08-25 18:35:33,537 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:35:33,539 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:35:36,641 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WKTpDnCF3Ab0v23g84u5qY0sDAe', created=1756146933, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"sed -n \'1,200p\' /thomaseleff__bunsen/bunsen/issue_agent/agent.py"}', name='bash'), id='call_85F3AKfJmU8iZjKcMem7jj9V', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=114, prompt_tokens=1575, total_tokens=1689, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=64, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=1280, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:35:36,645 - DEBUG - swea-lm - input_tokens=1,017, output_tokens=0, instance_cost=0.01, cost=0.00
+2025-08-25 18:35:36,646 - DEBUG - swea-lm - total_tokens_sent=3,922, total_tokens_received=0, total_cost=0.01, total_api_calls=6
+2025-08-25 18:35:36,647 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+sed -n '1,200p' /thomaseleff__bunsen/bunsen/issue_agent/agent.py
+2025-08-25 18:35:36,898 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:35:37,222 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+"""Bunsen issue-agent service"""
+
+from fastapi import FastAPI, Request, HTTPException
+import hashlib
+import hmac
+from starlette.responses import PlainTextResponse
+import uvicorn
+
+from bunsen.shared import settings
+from bunsen.issue_agent import core
+
+# Create the FastAPI application
+app = FastAPI()
+
+
+def create_issue_chat_agent(installation_id: int):
+    """Creates a new instance of the Bunsen-issue-agent with the necessary
+    GitHub App authentication details.
+    """
+    return core.Bunsen(
+        app_id=settings.GITHUB_APP_ID,
+        private_key=settings.GITHUB_PRIVATE_KEY,
+        installation_id=installation_id
+    )
+
+
+@app.get("/", status_code=200, response_class=PlainTextResponse)
+def root():
+    """A simple root endpoint to confirm the application is running.
+
+    Returns:
+        PlainTextResponse: A simple status message.
+    """
+    return "The Bunsen issue-agent is running!"
+
+
+@app.post("/github-webhook")
+async def github_webhook(request: Request):
+    """Endpoint to receive and process GitHub webhook events.
+
+    This endpoint authenticates as a GitHub App using the installation ID
+    from the webhook payload.
+
+    Args:
+        request (Request): The incoming request object from FastAPI.
+    """
+
+    # Get the event type from the headers
+    event_type = request.headers.get("X-GitHub-Event", "ping")
+
+    # Handle the 'ping' event to confirm the webhook is active
+    if event_type == "ping":
+        return {"msg": "Ping event received successfully!"}
+
+    # Otherwise, verify the webhook signature to ensure the request
+    #   is from GitHub
+
+    signature = request.headers.get("X-Hub-Signature-256")
+    if not signature:
+        raise HTTPException(
+            status_code=401, detail="X-Hub-Signature-256 header missing"
+        )
+
+    body = await request.body()
+    secret_bytes = settings.GITHUB_WEBHOOK_SECRET.encode("utf-8")
+    mac = hmac.new(secret_bytes, msg=body, digestmod=hashlib.sha256)
+    expected_signature = "sha256=" + mac.hexdigest()
+
+    if not hmac.compare_digest(expected_signature, signature):
+        raise HTTPException(
+            status_code=403, detail="X-Hub-Signature-256 header is invalid"
+        )
+
+    # Parse the request body as JSON
+    payload = await request.json()
+    action = payload.get("action")
+
+    # Extract the necessary details from the payload
+    repo_name = payload.get("repository", {}).get("full_name")
+    issue_id = payload.get("issue", {}).get("number")
+    installation_id = payload.get("installation", {}).get("id")
+
+    # Extract the sender's login to avoid the agent responding to its own comments
+    sender_login = payload.get("sender", {}).get("login")
+
+    # If any required information is missing, stop processing.
+    if not all([installation_id, repo_name, issue_id]):
+        print("Missing required information in the webhook payload. Ignoring event.")
+        return {"msg": "Payload incomplete. Ignoring..."}
+
+    # Instantiate the agent using the new credentials.
+    try:
+        bunsen = create_issue_chat_agent(installation_id=installation_id)
+    except Exception as e:
+        print(f"Could not create the Bunsen issue-agent: {e}")
+        return {"msg": "The Bunsen issue-agent initialization failed. Ignoring..."}
+
+    # Dispatch the Beaker swe-agent workflow if the issue is labeled with the coding trigger
+    if event_type == "issues" and action == "labeled":
+        label = payload.get("label", {}).get("name")
+        if label == settings.GITHUB_CODING_TRIGGER_LABEL:
+            print(
+                f"Label '{settings.GITHUB_CODING_TRIGGER_LABEL}' added to issue #{issue_id}."
+                " Dispatching the Beaker swe-agent workflow."
+            )
+
+            # Dispatch the Beaker swe-agent workflow
+            bunsen.dispatch_coding_agent(
+                repo_name=repo_name,
+                issue_id=issue_id,
+            )
+            return {"msg": f"Dispatched the Beaker swe-agent for issue #{issue_id}."}
+
+    # Run the Bunsen issue-agent comment workflow
+    if event_type in ["issues", "issue_comment"]:
+        if action == "opened" or (action == "created" and sender_login != bunsen.agent_name):
+            print(f"Received {event_type} event: {action}")
+            bunsen.comment(
+                repo_name=repo_name,
+                issue_id=issue_id,
+            )
+
+    return {"msg": "Github event processed successfully."}
+
+
+if __name__ == "__main__":
+
+    # Run the application with Uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+
+2025-08-25 18:35:37,229 - INFO - swea-agent - ========================= STEP 7 =========================
+2025-08-25 18:35:37,230 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:35:37,232 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:35:42,416 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WKXiDA1XHIjXeH36IdzxgVrXWHu', created=1756146937, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"sed -n \'1,200p\' /thomaseleff__bunsen/coverage/COVERAGE.md"}', name='bash'), id='call_uBK8H10Ckq0cNOm9kuEhEZ4u', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=441, prompt_tokens=2645, total_tokens=3086, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=384, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=0, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:35:42,421 - DEBUG - swea-lm - input_tokens=2,092, output_tokens=0, instance_cost=0.02, cost=0.00
+2025-08-25 18:35:42,422 - DEBUG - swea-lm - total_tokens_sent=6,014, total_tokens_received=0, total_cost=0.02, total_api_calls=7
+2025-08-25 18:35:42,423 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+sed -n '1,200p' /thomaseleff__bunsen/coverage/COVERAGE.md
+2025-08-25 18:35:42,671 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:35:42,934 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+\xff\xfe|   N a m e                                                                             |         S t m t s   |           M i s s   |       C o v e r   |       M i s s i n g   |  
+ | - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -   |   - - - - - - - :   |   - - - - - - - :   |   - - - - - - :   |   - - - - - - - - :   |  
+ |   b u n s e n \ \ _ \ _ i n i t \ _ \ _ . p y                                         |                 0   |                 0   |         1 0 0 %   |                       |  
+ |   b u n s e n \ i s s u e \ _ c h a t \ _ a g e n t \ \ _ \ _ i n i t \ _ \ _ . p y   |                 2   |                 0   |         1 0 0 %   |                       |  
+ |   b u n s e n \ i s s u e \ _ c h a t \ _ a g e n t \ a p p . p y                     |               4 7   |               2 9   |           3 8 %   | 2 9 ,   4 0 ,   5 5 - 1 0 0 ,   1 0 5 - 1 1 5   |  
+ |   b u n s e n \ i s s u e \ _ c h a t \ _ a g e n t \ c o r e . p y                   |               5 4   |               1 7   |           6 9 %   | 3 1 ,   3 3 ,   4 4 ,   1 0 8 - 1 3 9   |  
+ |   b u n s e n \ i s s u e \ _ c h a t \ _ a g e n t \ p r o m p t s . p y             |                 3   |                 1   |           6 7 %   |                 3 0   |  
+ |   b u n s e n \ s h a r e d \ \ _ \ _ i n i t \ _ \ _ . p y                           |                 2   |                 0   |         1 0 0 %   |                       |  
+ |   b u n s e n \ s h a r e d \ g i t h u b \ _ c l i e n t . p y                       |             1 1 1   |               9 9   |           1 1 %   | 2 1 - 2 7 ,   3 9 - 4 4 ,   5 8 - 6 6 ,   8 0 - 8 7 ,   9 9 - 1 0 5 ,   1 1 8 - 1 2 4 ,   1 4 1 - 1 5 1 ,   1 6 8 - 1 8 2 ,   2 0 6 - 2 5 0 ,   2 7 6 - 2 9 5   |  
+ |   b u n s e n \ s h a r e d \ p e r s o n a s . p y                                   |                 6   |                 0   |         1 0 0 %   |                       |  
+ |   b u n s e n \ s h a r e d \ y a m l \ _ u t i l s . p y                             |                 9   |                 1   |           8 9 %   |                 2 1   |  
+ |                                                                   * * T O T A L * *   |     * * 2 3 4 * *   |     * * 1 4 7 * *   |   * * 3 7 % * *   |                       |  
+ 
+2025-08-25 18:35:42,939 - INFO - swea-agent - ========================= STEP 8 =========================
+2025-08-25 18:35:42,940 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:35:42,942 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:35:59,661 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WKdyvKSJCfkqCvtbSPlajucVjhI', created=1756146943, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"sed -n \'1,200p\' /thomaseleff__bunsen/README.md"}', name='bash'), id='call_vmkuAC5vvAo52XU4qvl7DCmw', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=1516, prompt_tokens=5070, total_tokens=6586, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=1472, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=1152, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:35:59,665 - DEBUG - swea-lm - input_tokens=4,523, output_tokens=0, instance_cost=0.03, cost=0.01
+2025-08-25 18:35:59,666 - DEBUG - swea-lm - total_tokens_sent=10,537, total_tokens_received=0, total_cost=0.03, total_api_calls=8
+2025-08-25 18:35:59,667 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+sed -n '1,200p' /thomaseleff__bunsen/README.md
+2025-08-25 18:35:59,918 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:36:00,233 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+# bunsen -- an AI research & development squad
+
+Welcome to 🧪 `bunsen`, an experimental (and occasionally explosive) AI-powered squad for software development\! Inspired by the brilliant, yet sometimes oblivious, Dr. Bunsen Honeydew and his long-suffering, accident-prone assistant, Beaker, from the Muppets. Bunsen and Beaker work together to accelerate your development cycles while keeping you safe from unexpected "meep meep\!" moments.
+
+Bunsen (the **issue-agent**) meticulously researches and clarifies requirements, ensuring the implementation details are sound. Meanwhile, Beaker (the **swe-agent**) bravely takes those plans and builds, tests, and deploys the code. Beaker can be a bit... unpredictable, so the entire workflow maintains a crucial **human-in-the-loop** safety mechanism to prevent those infamous lab 💥 "explosions".
+
+## The bunsen dynamic -- features & philosophy
+
+🧪 `bunsen` isn't just about throwing AI at your codebase. It's about intelligent collaboration,
+
+  * **Bunsen** acts as your AI product manager / business analyst, expanding your Github experience with **Interactive issue discussions** and **Contextual understanding**.
+      * **Interactive issue discussions** Chat directly with Bunsen in GitHub issues to refine requirements, clarify design choices, and define precise success criteria. Bunsen will ask probing questions, and ensure every detail is meticulously documented before Beaker even touches a keyboard.
+      * `coming-soon` **Contextual understanding** Bunsen has read-access to your repository. This means it can review existing code, documentation, and project structure to provide informed suggestions and catch potential conflicts early. No more vague requirements leading to rework\!
+  * **Beaker** acts as your AI software engineer, expanding your product development squad with an embedded engineer within Github Actions providing **Autonomous implementation**, **Automated pr generation**, and **Test-driven execution**.
+      * **Autonomous implementation** Once Bunsen has finalized the requirements, Beaker autonomously implements, tests, and commits code changes.
+      * **Automated pr generation** Beaker will open a new pull request, linking back to the original issue, and assign you as the reviewer.
+      * **Test-driven execution** Beaker is trained to run tests and ensure the code changes meet the defined success criteria, reducing the chances of broken builds.
+  * **Human-in-the-loop**
+      * Even the most brilliant experiments can go awry. That's why you, the human, are always in control.
+      * **Review-before-you-merge** Every change Beaker makes results in a pull request. You get to review the code, suggest changes, and ensure it aligns with your vision before it's merged into your main branch.
+      * `coming-soon` **Iterative feedback** If Beaker's PR isn't quite right, simply add comments on the pull request. Beaker can then iterate on the changes based on your feedback, just like a human collaborator.
+
+🧪 `bunsen` provides the speed and scalability of AI development combined with the critical oversight of human intelligence, ensuring your project progresses rapidly and safely.
+
+-----
+
+# How bunsen works
+
+Behind the scenes, Bunsen's magic happens through a combination of configuration files, a publicly exposed webhook, and a GitHub Actions workflow.
+
+## Agent configuration
+
+Bunsen and Beaker's behavior is managed by two distinct configuration files:
+
+  * `settings.yaml` Contains non-sensitive settings that can be safely committed to your repository. It defines the GitHub repository details (e.g. the coding trigger label (`ready-for-dev`)), and the specific LLM models used by each agent (e.g. `openai/gpt-5`). See the LiteLLM [documentation](https://docs.litellm.ai/docs/providers) on available providers.
+  * `.env` Contains sensitive secrets, such as the Github App credentials and LLM API Key. Never commit this file to your repository.
+
+## How the agents interact
+
+The interaction between the user, Bunsen, and Beaker is a carefully orchestrated sequence of events,
+
+  1. A user creates a GitHub issue or adds a comment to an existing issue.
+  2. GitHub sends a webhook payload via a Github App to your deployed Bunsen `issue_agent` (a FastAPI application).
+  3. The Bunsen `issue_agent` processes the payload, responding on the Github issue when mentioned, e.g. `@bunsen-issue-agent`, or dispatching the Beaker `swe-agent` if it detects that the coding trigger label was added to the Github issue.
+  4. If the coding trigger label is detected the Bunsen `issue-agent` makes a GitHub API call to trigger the Beaker `swe-agent`, defined within a Github Action workflow (e.g., `.github/workflows/swe_agent.yaml`).
+  5. Once dispatched, a GitHub runner starts a job, clones the repository, and executes the Python script for the Beaker `swe-agent`.
+  6. Finally, the Beaker `swe-agent` gets to work, generating code and creating a pull request for review.
+
+## Deployment
+
+Deploying 🧪 `bunsen` involves two main components,
+
+  * The Bunsen **issue-agent** (`bunsen/issue_agent/agent.py`) The FastAPI application that must be hosted on a public server (like a cloud VM or container platform) so that it is reachable by a GitHub webhook.
+  * The Beaker **swe-agent** (`bunsen/swe_agent/agent.py`) The agent runs directly on GitHub's own infrastructure via GitHub Actions. It does not require separate hosting. A Github Actions workflow file (e.g. `.github/workflows/swe_agent.yaml`) tells GitHub how to set up the environment and run the agent.
+
+----
+
+## Getting started
+
+To integrate 🧪 `bunsen` into your workflow, you'll primarily interact with GitHub issues and pull requests.
+
+### Prerequisites
+
+  * **Python 3.11+**: Ensure you have a compatible Python environment.
+  * **GitHub Account**: You'll need a GitHub account and admin access to the repositories you wish to integrate with.
+  * **GitHub App**: For authentication with the GitHub API. A Github App also provides your bunsen issue-agent with its persona (e.g. if you name the Github App `bunsen-issue-agent`, you'll mention the agent in issues by including `@bunsen-issue-agent`.)
+  * **LLM API key**: An API key for your chosen Large Language Model (e.g., OpenAI, Anthropic, etc.). See the LiteLLM [documentation](https://docs.litellm.ai/docs/providers) on available providers. Keep in mind that the underlying tools, `swe-agent` and `LiteLLM` are in-development and some providers may not perform as well as others. Check the Github repositories of each of those projects for up-do-date information on the best supported providers/models.
+
+### Installation
+
+1.  **Clone the repository**
+
+    ```bash
+    git clone https://github.com/thomaseleff/bunsen.git
+    cd bunsen
+    ```
+
+2.  **Create a virtual environment**
+
+    ```bash
+    python -m venv .venv
+    source .venv/bin/activate  # On Windows, .venv\Scripts\activate
+    ```
+
+3.  **Install the library**
+
+    ```bash
+    pip install .
+    ```
+
+4.  **Configure environment variables**
+    Copy the example environment file, `.env.example` and fill in your secrets.
+
+    ```bash
+    cp .env.example .env
+    # Open .env and add your tokens and secrets.
+    ```
+
+5.  **Create a Github App and set up GitHub webhooks**
+    Create a Github App and configure a webhook to your deployed Bunsen `issue-agent` FastAPI application (e.g., `https://your-server.com/github-webhook`).
+    
+    Enable `Actions` (as 'Read and write'), `Contents` (as 'Read and write), `Issues` (as 'Read and write'), and `Pull requests` (as Read and write) within the **Repository permissions**.
+    
+    Subscribe to the `Issues`, `Issue comment`, and `Label` events.
+
+6.  **Set up GitHub Actions workflows**
+    Ensure the `swe-agent.yaml` workflows in `.github/workflows/` are correctly configured for your deployment.
+
+-----
+
+## Usage -- how to work with bunsen
+
+### Bunsen (issue-agent)
+
+1.  **Create a new GitHub issue** Describe the feature, bug, or task you want to address.
+2.  **Tag Bunsen** In an issue comment, mention `@your-bot-username` (replace `your-bot-username` with the actual name of your GitHub App).
+      * **Example** "Hey `@bunsen-issue-agent`, I need to add a new user profile page. What information should it display, and what are the security considerations?"
+3.  **Iterate on requirements** Bunsen will respond in the issue comments, asking clarifying questions, suggesting design elements, and refining success criteria. Continue the conversation until the requirements are finalized.
+4.  **Tag the issue for development** Once you are satisfied with the requirements, add the coding trigger label (e.g., `ready-for-dev`) to the issue. This tells Bunsen that the task is now prepared for Beaker.
+
+### Beaker (swe-agent)
+
+1.  **Trigger implementation** When the coding trigger label (e.g., `ready-for-dev`) is added to an issue, Bunsen will dispatch Beaker via a Github Action workflow.
+2.  **Autonomous development** Beaker will,
+      * Read the issue and comments
+      * Work in a sandboxed environment to implement code changes
+      * Run tests to ensure functionality
+      * Commit the changes to a new branch (e.g., `feat/issue-123-new-profile-page`).
+3.  **Pull request for review** Beaker will automatically open a pull request assigned to you for review.
+4.  **Review and iterate**
+      * Review Beaker's code changes.
+      * `coming-soon` If changes are needed, add comments directly on the pull request. Beaker can attempt to address these comments and push new commits to the PR.
+      * Once satisfied, merge the pull request\!
+
+-----
+
+## Preventing explosions
+
+While Bunsen and Beaker are diligent, AI can sometimes have unexpected results (just like in the lab\!). Follow these best practices to ensure a smooth, explosion-free workflow,
+
+  * **Start small** Begin with simpler issues and features to get comfortable with the agents' behavior.
+  * **Clear & concise issues** The clearer your initial issue description, the better Bunsen can guide the conversation and prepare Beaker.
+  * **Thorough review**: Always carefully review Beaker's generated pull requests. Think of it as a final safety check before the experiment goes live.
+  * `coming-soon` **Provide detailed feedback** If Beaker makes a mistake, provide clear and specific feedback in the PR comments. The more precise you are, the better Beaker can learn and adapt.
+  * **Monitor workflows** Keep an eye on your GitHub Actions workflows for any failures or unexpected behavior.
+
+2025-08-25 18:36:00,246 - INFO - swea-agent - ========================= STEP 9 =========================
+2025-08-25 18:36:00,247 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:36:00,251 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:36:04,669 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WKudLIW7he15IMw1SXIGJw4nuib', created=1756146960, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"grep -R \\"healthcheck\\" -n /thomaseleff__bunsen"}', name='bash'), id='call_deDPEjQFI7lFzcj6vXOpMOth', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=297, prompt_tokens=7526, total_tokens=7823, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=256, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=4992, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:36:04,674 - DEBUG - swea-lm - input_tokens=6,966, output_tokens=0, instance_cost=0.03, cost=0.01
+2025-08-25 18:36:04,674 - DEBUG - swea-lm - total_tokens_sent=17,503, total_tokens_received=0, total_cost=0.03, total_api_calls=9
+2025-08-25 18:36:04,676 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+grep -R "healthcheck" -n /thomaseleff__bunsen
+2025-08-25 18:36:04,925 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:36:05,207 - INFO - swea-agent - 🤖 MODEL INPUT
+Your command ran successfully and did not produce any output.
+2025-08-25 18:36:05,212 - INFO - swea-agent - ========================= STEP 10 =========================
+2025-08-25 18:36:05,213 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:36:05,216 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:36:11,072 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WKzRIGG5Mux4qiczTmEs8jp689N', created=1756146965, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"find /thomaseleff__bunsen -maxdepth 2 -type f -name \\"*.py\\""}', name='bash'), id='call_kgpy11tkahJ766sY6eYwrjmw', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=431, prompt_tokens=7582, total_tokens=8013, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=384, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=1536, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:36:11,076 - DEBUG - swea-lm - input_tokens=7,026, output_tokens=0, instance_cost=0.04, cost=0.01
+2025-08-25 18:36:11,077 - DEBUG - swea-lm - total_tokens_sent=24,529, total_tokens_received=0, total_cost=0.04, total_api_calls=10
+2025-08-25 18:36:11,078 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+find /thomaseleff__bunsen -maxdepth 2 -type f -name "*.py"
+2025-08-25 18:36:11,325 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:36:11,625 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+/thomaseleff__bunsen/bunsen/__init__.py
+
+2025-08-25 18:36:11,629 - INFO - swea-agent - ========================= STEP 11 =========================
+2025-08-25 18:36:11,631 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:36:11,634 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:36:19,601 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WL6agsUmaqikkxNSc6HyH9SwMcs', created=1756146972, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"ls -a /thomaseleff__bunsen"}', name='bash'), id='call_MCBBaygJP4woMQ0sUuCFsCBz', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=675, prompt_tokens=7654, total_tokens=8329, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=640, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=7552, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:36:19,606 - DEBUG - swea-lm - input_tokens=7,102, output_tokens=0, instance_cost=0.05, cost=0.01
+2025-08-25 18:36:19,606 - DEBUG - swea-lm - total_tokens_sent=31,631, total_tokens_received=0, total_cost=0.05, total_api_calls=11
+2025-08-25 18:36:19,608 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+ls -a /thomaseleff__bunsen
+2025-08-25 18:36:19,856 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:36:20,183 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+.	      .flake8	  Dockerfile  coverage		  requirements_dev.txt
+..	      .git	  LICENSE     docker-compose.yml  setup.cfg
+.bunsen       .github	  README.md   pyproject.toml
+.env.example  .gitignore  bunsen      requirements.txt
+
+2025-08-25 18:36:20,189 - INFO - swea-agent - ========================= STEP 12 =========================
+2025-08-25 18:36:20,190 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:36:20,194 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:36:26,355 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WLFNwV0lnZc08TWwhIwBA5z3dG0', created=1756146981, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"sed -n \'1,200p\' /thomaseleff__bunsen/bunsen/issue_agent/agent.py"}', name='bash'), id='call_ek73tsBt6guqf96Zmrf3bcHD', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=306, prompt_tokens=7754, total_tokens=8060, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=256, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=7552, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:36:26,432 - DEBUG - swea-lm - input_tokens=7,207, output_tokens=0, instance_cost=0.05, cost=0.00
+2025-08-25 18:36:26,433 - DEBUG - swea-lm - total_tokens_sent=38,838, total_tokens_received=0, total_cost=0.05, total_api_calls=12
+2025-08-25 18:36:26,434 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+sed -n '1,200p' /thomaseleff__bunsen/bunsen/issue_agent/agent.py
+2025-08-25 18:36:26,682 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:36:26,949 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+"""Bunsen issue-agent service"""
+
+from fastapi import FastAPI, Request, HTTPException
+import hashlib
+import hmac
+from starlette.responses import PlainTextResponse
+import uvicorn
+
+from bunsen.shared import settings
+from bunsen.issue_agent import core
+
+# Create the FastAPI application
+app = FastAPI()
+
+
+def create_issue_chat_agent(installation_id: int):
+    """Creates a new instance of the Bunsen-issue-agent with the necessary
+    GitHub App authentication details.
+    """
+    return core.Bunsen(
+        app_id=settings.GITHUB_APP_ID,
+        private_key=settings.GITHUB_PRIVATE_KEY,
+        installation_id=installation_id
+    )
+
+
+@app.get("/", status_code=200, response_class=PlainTextResponse)
+def root():
+    """A simple root endpoint to confirm the application is running.
+
+    Returns:
+        PlainTextResponse: A simple status message.
+    """
+    return "The Bunsen issue-agent is running!"
+
+
+@app.post("/github-webhook")
+async def github_webhook(request: Request):
+    """Endpoint to receive and process GitHub webhook events.
+
+    This endpoint authenticates as a GitHub App using the installation ID
+    from the webhook payload.
+
+    Args:
+        request (Request): The incoming request object from FastAPI.
+    """
+
+    # Get the event type from the headers
+    event_type = request.headers.get("X-GitHub-Event", "ping")
+
+    # Handle the 'ping' event to confirm the webhook is active
+    if event_type == "ping":
+        return {"msg": "Ping event received successfully!"}
+
+    # Otherwise, verify the webhook signature to ensure the request
+    #   is from GitHub
+
+    signature = request.headers.get("X-Hub-Signature-256")
+    if not signature:
+        raise HTTPException(
+            status_code=401, detail="X-Hub-Signature-256 header missing"
+        )
+
+    body = await request.body()
+    secret_bytes = settings.GITHUB_WEBHOOK_SECRET.encode("utf-8")
+    mac = hmac.new(secret_bytes, msg=body, digestmod=hashlib.sha256)
+    expected_signature = "sha256=" + mac.hexdigest()
+
+    if not hmac.compare_digest(expected_signature, signature):
+        raise HTTPException(
+            status_code=403, detail="X-Hub-Signature-256 header is invalid"
+        )
+
+    # Parse the request body as JSON
+    payload = await request.json()
+    action = payload.get("action")
+
+    # Extract the necessary details from the payload
+    repo_name = payload.get("repository", {}).get("full_name")
+    issue_id = payload.get("issue", {}).get("number")
+    installation_id = payload.get("installation", {}).get("id")
+
+    # Extract the sender's login to avoid the agent responding to its own comments
+    sender_login = payload.get("sender", {}).get("login")
+
+    # If any required information is missing, stop processing.
+    if not all([installation_id, repo_name, issue_id]):
+        print("Missing required information in the webhook payload. Ignoring event.")
+        return {"msg": "Payload incomplete. Ignoring..."}
+
+    # Instantiate the agent using the new credentials.
+    try:
+        bunsen = create_issue_chat_agent(installation_id=installation_id)
+    except Exception as e:
+        print(f"Could not create the Bunsen issue-agent: {e}")
+        return {"msg": "The Bunsen issue-agent initialization failed. Ignoring..."}
+
+    # Dispatch the Beaker swe-agent workflow if the issue is labeled with the coding trigger
+    if event_type == "issues" and action == "labeled":
+        label = payload.get("label", {}).get("name")
+        if label == settings.GITHUB_CODING_TRIGGER_LABEL:
+            print(
+                f"Label '{settings.GITHUB_CODING_TRIGGER_LABEL}' added to issue #{issue_id}."
+                " Dispatching the Beaker swe-agent workflow."
+            )
+
+            # Dispatch the Beaker swe-agent workflow
+            bunsen.dispatch_coding_agent(
+                repo_name=repo_name,
+                issue_id=issue_id,
+            )
+            return {"msg": f"Dispatched the Beaker swe-agent for issue #{issue_id}."}
+
+    # Run the Bunsen issue-agent comment workflow
+    if event_type in ["issues", "issue_comment"]:
+        if action == "opened" or (action == "created" and sender_login != bunsen.agent_name):
+            print(f"Received {event_type} event: {action}")
+            bunsen.comment(
+                repo_name=repo_name,
+                issue_id=issue_id,
+            )
+
+    return {"msg": "Github event processed successfully."}
+
+
+if __name__ == "__main__":
+
+    # Run the application with Uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+
+2025-08-25 18:36:26,959 - INFO - swea-agent - ========================= STEP 13 =========================
+2025-08-25 18:36:26,960 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:36:26,964 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:36:31,829 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WLLLP7IYydHkozngNTxxlrv7yfq', created=1756146987, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"grep -R \\"def test_\\" -n /thomaseleff__bunsen"}', name='bash'), id='call_nM9y75qiSpva59UA5be5prfT', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=234, prompt_tokens=8824, total_tokens=9058, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=192, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=7680, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:36:31,833 - DEBUG - swea-lm - input_tokens=8,279, output_tokens=0, instance_cost=0.05, cost=0.00
+2025-08-25 18:36:31,834 - DEBUG - swea-lm - total_tokens_sent=47,117, total_tokens_received=0, total_cost=0.05, total_api_calls=13
+2025-08-25 18:36:31,835 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+grep -R "def test_" -n /thomaseleff__bunsen
+2025-08-25 18:36:32,085 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:36:32,365 - INFO - swea-agent - 🤖 MODEL INPUT
+Your command ran successfully and did not produce any output.
+2025-08-25 18:36:32,372 - INFO - swea-agent - ========================= STEP 14 =========================
+2025-08-25 18:36:32,374 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:36:32,378 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:36:38,662 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WLQovUMTuD4u1vNdUT0ZNUnXhDA', created=1756146992, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"ls -R /thomaseleff__bunsen/.github"}', name='bash'), id='call_QuCcuCDmMxirxYbUUjrVlPDp', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=421, prompt_tokens=8881, total_tokens=9302, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=384, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=8704, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:36:38,666 - DEBUG - swea-lm - input_tokens=8,339, output_tokens=0, instance_cost=0.06, cost=0.00
+2025-08-25 18:36:38,667 - DEBUG - swea-lm - total_tokens_sent=55,456, total_tokens_received=0, total_cost=0.06, total_api_calls=14
+2025-08-25 18:36:38,668 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+ls -R /thomaseleff__bunsen/.github
+2025-08-25 18:36:38,915 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:36:39,231 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+/thomaseleff__bunsen/.github:
+workflows
+
+/thomaseleff__bunsen/.github/workflows:
+swe_agent.yaml
+
+2025-08-25 18:36:39,239 - INFO - swea-agent - ========================= STEP 15 =========================
+2025-08-25 18:36:39,241 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:36:39,245 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:36:48,019 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WLXdnzvoV4cba46YNUuSIiUnIUf', created=1756146999, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"sed -n \'1,200p\' /thomaseleff__bunsen/pyproject.toml"}', name='bash'), id='call_FB6LLgCViS7oTLcgHYQiLxcM', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=750, prompt_tokens=8960, total_tokens=9710, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=704, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=8832, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:36:48,024 - DEBUG - swea-lm - input_tokens=8,424, output_tokens=0, instance_cost=0.07, cost=0.01
+2025-08-25 18:36:48,024 - DEBUG - swea-lm - total_tokens_sent=63,880, total_tokens_received=0, total_cost=0.07, total_api_calls=15
+2025-08-25 18:36:48,026 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+sed -n '1,200p' /thomaseleff__bunsen/pyproject.toml
+2025-08-25 18:36:48,272 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:36:48,595 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+[build-system]
+requires = ["setuptools>=64.0", "setuptools_scm[toml]>=8"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+2025-08-25 18:36:48,603 - INFO - swea-agent - ========================= STEP 16 =========================
+2025-08-25 18:36:48,605 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:36:48,609 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:36:52,623 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WLgrbTm6JD2UKvCn5e0s67qNoAt', created=1756147008, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"grep -R \\"pytest\\" -n /thomaseleff__bunsen"}', name='bash'), id='call_xRPWEaRbCO42StKJ8gNCgswL', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=245, prompt_tokens=9056, total_tokens=9301, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=192, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=8960, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:36:52,627 - DEBUG - swea-lm - input_tokens=8,522, output_tokens=0, instance_cost=0.07, cost=0.00
+2025-08-25 18:36:52,628 - DEBUG - swea-lm - total_tokens_sent=72,402, total_tokens_received=0, total_cost=0.07, total_api_calls=16
+2025-08-25 18:36:52,629 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+grep -R "pytest" -n /thomaseleff__bunsen
+2025-08-25 18:36:52,879 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:36:53,156 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+/thomaseleff__bunsen/.gitignore:9:.pytest_cache
+/thomaseleff__bunsen/requirements_dev.txt:1:pytest==8.4.1
+/thomaseleff__bunsen/setup.cfg:25:    pytest
+
+2025-08-25 18:36:53,165 - INFO - swea-agent - ========================= STEP 17 =========================
+2025-08-25 18:36:53,167 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:36:53,171 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:37:00,193 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WLlWwd3T5YyqmqHUeGUiIgsZlUn', created=1756147013, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"grep -R \\"ping\\" -n /thomaseleff__bunsen"}', name='bash'), id='call_ThxDY1amS9DxTwC6uzLmCkST', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=680, prompt_tokens=9163, total_tokens=9843, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=640, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=8960, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:37:00,198 - DEBUG - swea-lm - input_tokens=8,634, output_tokens=0, instance_cost=0.07, cost=0.01
+2025-08-25 18:37:00,198 - DEBUG - swea-lm - total_tokens_sent=81,036, total_tokens_received=0, total_cost=0.07, total_api_calls=17
+2025-08-25 18:37:00,200 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+grep -R "ping" -n /thomaseleff__bunsen
+2025-08-25 18:37:00,451 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:37:00,731 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+/thomaseleff__bunsen/bunsen/shared/llms.py:3:from typing import Any, Literal
+/thomaseleff__bunsen/bunsen/shared/settings.py:20:                methodical, clear, and always ask for clarification before jumping to
+/thomaseleff__bunsen/bunsen/issue_agent/agent.py:49:    event_type = request.headers.get("X-GitHub-Event", "ping")
+/thomaseleff__bunsen/bunsen/issue_agent/agent.py:51:    # Handle the 'ping' event to confirm the webhook is active
+/thomaseleff__bunsen/bunsen/issue_agent/agent.py:52:    if event_type == "ping":
+/thomaseleff__bunsen/README.md:3:Welcome to 🧪 `bunsen`, an experimental (and occasionally explosive) AI-powered squad for software development\! Inspired by the brilliant, yet sometimes oblivious, Dr. Bunsen Honeydew and his long-suffering, accident-prone assistant, Beaker, from the Muppets. Bunsen and Beaker work together to accelerate your development cycles while keeping you safe from unexpected "meep meep\!" moments.
+/thomaseleff__bunsen/.bunsen/issue_agent.yaml:5:      methodical, clear, and always ask for clarification before jumping to
+/thomaseleff__bunsen/.git/hooks/push-to-checkout.sample:38:# branches while keeping the local changes in the working tree that do
+
+2025-08-25 18:37:00,742 - INFO - swea-agent - ========================= STEP 18 =========================
+2025-08-25 18:37:00,744 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:37:00,749 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:37:31,982 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WLt4lpYwD5FCoQtePOl7zsUkpFF', created=1756147021, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"nl -ba /thomaseleff__bunsen/bunsen/issue_agent/agent.py"}', name='bash'), id='call_Xutt9pMcgjXMEBqfOZY2IvxB', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=2437, prompt_tokens=9550, total_tokens=11987, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=2368, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=7424, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:37:31,986 - DEBUG - swea-lm - input_tokens=9,028, output_tokens=0, instance_cost=0.09, cost=0.02
+2025-08-25 18:37:31,987 - DEBUG - swea-lm - total_tokens_sent=90,064, total_tokens_received=0, total_cost=0.09, total_api_calls=18
+2025-08-25 18:37:31,988 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+nl -ba /thomaseleff__bunsen/bunsen/issue_agent/agent.py
+2025-08-25 18:37:32,236 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:37:32,496 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+     1	"""Bunsen issue-agent service"""
+     2	
+     3	from fastapi import FastAPI, Request, HTTPException
+     4	import hashlib
+     5	import hmac
+     6	from starlette.responses import PlainTextResponse
+     7	import uvicorn
+     8	
+     9	from bunsen.shared import settings
+    10	from bunsen.issue_agent import core
+    11	
+    12	# Create the FastAPI application
+    13	app = FastAPI()
+    14	
+    15	
+    16	def create_issue_chat_agent(installation_id: int):
+    17	    """Creates a new instance of the Bunsen-issue-agent with the necessary
+    18	    GitHub App authentication details.
+    19	    """
+    20	    return core.Bunsen(
+    21	        app_id=settings.GITHUB_APP_ID,
+    22	        private_key=settings.GITHUB_PRIVATE_KEY,
+    23	        installation_id=installation_id
+    24	    )
+    25	
+    26	
+    27	@app.get("/", status_code=200, response_class=PlainTextResponse)
+    28	def root():
+    29	    """A simple root endpoint to confirm the application is running.
+    30	
+    31	    Returns:
+    32	        PlainTextResponse: A simple status message.
+    33	    """
+    34	    return "The Bunsen issue-agent is running!"
+    35	
+    36	
+    37	@app.post("/github-webhook")
+    38	async def github_webhook(request: Request):
+    39	    """Endpoint to receive and process GitHub webhook events.
+    40	
+    41	    This endpoint authenticates as a GitHub App using the installation ID
+    42	    from the webhook payload.
+    43	
+    44	    Args:
+    45	        request (Request): The incoming request object from FastAPI.
+    46	    """
+    47	
+    48	    # Get the event type from the headers
+    49	    event_type = request.headers.get("X-GitHub-Event", "ping")
+    50	
+    51	    # Handle the 'ping' event to confirm the webhook is active
+    52	    if event_type == "ping":
+    53	        return {"msg": "Ping event received successfully!"}
+    54	
+    55	    # Otherwise, verify the webhook signature to ensure the request
+    56	    #   is from GitHub
+    57	
+    58	    signature = request.headers.get("X-Hub-Signature-256")
+    59	    if not signature:
+    60	        raise HTTPException(
+    61	            status_code=401, detail="X-Hub-Signature-256 header missing"
+    62	        )
+    63	
+    64	    body = await request.body()
+    65	    secret_bytes = settings.GITHUB_WEBHOOK_SECRET.encode("utf-8")
+    66	    mac = hmac.new(secret_bytes, msg=body, digestmod=hashlib.sha256)
+    67	    expected_signature = "sha256=" + mac.hexdigest()
+    68	
+    69	    if not hmac.compare_digest(expected_signature, signature):
+    70	        raise HTTPException(
+    71	            status_code=403, detail="X-Hub-Signature-256 header is invalid"
+    72	        )
+    73	
+    74	    # Parse the request body as JSON
+    75	    payload = await request.json()
+    76	    action = payload.get("action")
+    77	
+    78	    # Extract the necessary details from the payload
+    79	    repo_name = payload.get("repository", {}).get("full_name")
+    80	    issue_id = payload.get("issue", {}).get("number")
+    81	    installation_id = payload.get("installation", {}).get("id")
+    82	
+    83	    # Extract the sender's login to avoid the agent responding to its own comments
+    84	    sender_login = payload.get("sender", {}).get("login")
+    85	
+    86	    # If any required information is missing, stop processing.
+    87	    if not all([installation_id, repo_name, issue_id]):
+    88	        print("Missing required information in the webhook payload. Ignoring event.")
+    89	        return {"msg": "Payload incomplete. Ignoring..."}
+    90	
+    91	    # Instantiate the agent using the new credentials.
+    92	    try:
+    93	        bunsen = create_issue_chat_agent(installation_id=installation_id)
+    94	    except Exception as e:
+    95	        print(f"Could not create the Bunsen issue-agent: {e}")
+    96	        return {"msg": "The Bunsen issue-agent initialization failed. Ignoring..."}
+    97	
+    98	    # Dispatch the Beaker swe-agent workflow if the issue is labeled with the coding trigger
+    99	    if event_type == "issues" and action == "labeled":
+   100	        label = payload.get("label", {}).get("name")
+   101	        if label == settings.GITHUB_CODING_TRIGGER_LABEL:
+   102	            print(
+   103	                f"Label '{settings.GITHUB_CODING_TRIGGER_LABEL}' added to issue #{issue_id}."
+   104	                " Dispatching the Beaker swe-agent workflow."
+   105	            )
+   106	
+   107	            # Dispatch the Beaker swe-agent workflow
+   108	            bunsen.dispatch_coding_agent(
+   109	                repo_name=repo_name,
+   110	                issue_id=issue_id,
+   111	            )
+   112	            return {"msg": f"Dispatched the Beaker swe-agent for issue #{issue_id}."}
+   113	
+   114	    # Run the Bunsen issue-agent comment workflow
+   115	    if event_type in ["issues", "issue_comment"]:
+   116	        if action == "opened" or (action == "created" and sender_login != bunsen.agent_name):
+   117	            print(f"Received {event_type} event: {action}")
+   118	            bunsen.comment(
+   119	                repo_name=repo_name,
+   120	                issue_id=issue_id,
+   121	            )
+   122	
+   123	    return {"msg": "Github event processed successfully."}
+   124	
+   125	
+   126	if __name__ == "__main__":
+   127	
+   128	    # Run the application with Uvicorn
+   129	    uvicorn.run(app, host="0.0.0.0", port=8000)
+
+2025-08-25 18:37:32,516 - INFO - swea-agent - ========================= STEP 19 =========================
+2025-08-25 18:37:32,518 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:37:32,523 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:37:42,459 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WMPctUwTIhiQqEqmXcoEXFuhbhY', created=1756147053, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"sed -n \'1,200p\' /thomaseleff__bunsen/bunsen/swe_agent/agent.py"}', name='bash'), id='call_Wx0csuCwtCy03BXVm6xQlVrY', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=713, prompt_tokens=11033, total_tokens=11746, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=640, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=2560, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:37:42,463 - DEBUG - swea-lm - input_tokens=10,514, output_tokens=0, instance_cost=0.10, cost=0.01
+2025-08-25 18:37:42,464 - DEBUG - swea-lm - total_tokens_sent=100,578, total_tokens_received=0, total_cost=0.10, total_api_calls=19
+2025-08-25 18:37:42,465 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+sed -n '1,200p' /thomaseleff__bunsen/bunsen/swe_agent/agent.py
+2025-08-25 18:37:42,713 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:37:42,980 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+"""Beaker swe-agent service"""
+
+import argparse
+import sys
+
+from bunsen.shared import settings
+from bunsen.swe_agent import core
+
+
+def main():
+    """Main entry point for the Beaker swe-agent from the command line.
+
+    This function parses command-line arguments and initializes the agent.
+    """
+
+    # Parse command-line arguments
+    parser = argparse.ArgumentParser(description="Dispatch the Beaker swe-agent.")
+    parser.add_argument("--repo_name", type=str, help="The GitHub repository name in the format `{owner}/{repo}`.")
+    parser.add_argument("--installation_id", type=int, help="The GitHub App installation ID to use for authentication.")
+    parser.add_argument("--issue_id", type=int, help="The GitHub issue ID to implement, test, and commit.")
+    args = parser.parse_args()
+
+    try:
+
+        # Initialize the Beaker swe-agent
+        beaker = core.Beaker(
+            app_id=settings.GITHUB_APP_ID,
+            private_key=settings.GITHUB_PRIVATE_KEY,
+            installation_id=args.installation_id,
+        )
+
+        # Dispatch the Beaker swe-agent workflow
+        beaker.dispatch(
+            repo_name=args.repo_name,
+            repo_url=settings.GITHUB_REPO_URL,
+            issue_id=args.issue_id,
+            model_name=settings.BEAKER_MODEL_NAME,
+        )
+
+    except ValueError as e:
+        print(f"Initialization failed: {e}")
+        sys.exit(1)
+
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    sys.exit(main())
+
+2025-08-25 18:37:42,994 - INFO - swea-agent - ========================= STEP 20 =========================
+2025-08-25 18:37:42,996 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:37:43,002 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:38:05,764 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WMZQnlvJYocvUT602fiOPabW4uN', created=1756147063, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"sed -n \'1,200p\' /thomaseleff__bunsen/bunsen/issue_agent/core.py"}', name='bash'), id='call_HZExFvYAKvNBnQQDYmJnfwho', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=2057, prompt_tokens=11418, total_tokens=13475, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=1984, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=11008, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:38:05,770 - DEBUG - swea-lm - input_tokens=10,900, output_tokens=0, instance_cost=0.12, cost=0.01
+2025-08-25 18:38:05,770 - DEBUG - swea-lm - total_tokens_sent=111,478, total_tokens_received=0, total_cost=0.12, total_api_calls=20
+2025-08-25 18:38:05,772 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+sed -n '1,200p' /thomaseleff__bunsen/bunsen/issue_agent/core.py
+2025-08-25 18:38:06,019 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:38:06,350 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+"""Bunsen issue-agent actions"""
+
+from github import Issue, IssueComment
+import re
+
+from bunsen.shared import github, llms, settings
+from bunsen.issue_agent import prompts
+
+
+class Bunsen:
+    """The Bunsen issue-agent handles interactions on GitHub issues.
+
+    This agent, embodying the persona of Dr. Bunsen Honeydew, listens for new
+    comments on issues, uses a Large Language Model (LLM) to craft a response,
+    and posts the response back to the issue.
+    """
+
+    def __init__(self, app_id: str, private_key: str, installation_id: int):
+        """Initializes the Bunsen issue-agent by setting up the GitHub client,
+        LLM configuration, and agent persona using GitHub App credentials.
+
+        Args:
+            app_id (str): The ID of the GitHub App.
+            private_key (str): The private key for the GitHub App.
+            installation_id (int): The ID of the specific installation to act on behalf of.
+        """
+
+        # Initialize the GitHub client with GitHub App credentials
+        self.github_client = github.Client(
+            app_id=app_id,
+            private_key=private_key,
+            installation_id=installation_id
+        )
+
+        # Get the llm model
+        self.llm_model = llms.get_llm_model(agent="bunsen")
+
+        if not self.llm_model:
+            raise ValueError("`bunsen_model_name` not found in `settings.yaml`.")
+
+        # Set the agent name to the Github App user
+        self.agent_name = self.github_client.user
+
+    def _get_issue_data(self, repo_name: str, issue_id: int) -> tuple[Issue.Issue, list[IssueComment.IssueComment]]:
+        """Retrieves the issue and all associated comments.
+
+        Args:
+            repo_name (str): The name of the GitHub repository.
+            issue_id (int): The ID of the issue.
+
+        Returns:
+            tuple: A tuple containing the issue object and a list of comment objects.
+        """
+        issue = self.github_client.get_issue(repo_name, issue_id)
+        if not issue:
+            return None, None
+
+        comments = self.github_client.get_issue_comments(repo_name, issue_id)
+        return issue, comments
+
+    def _get_issue_author(self, issue: Issue.Issue) -> str:
+        """Retrieves the author of the Github issue.
+
+        Args:
+            issue (github.Issue.Issue): The Github issue object.
+
+        Returns:
+            str: The name of the Github issue author.
+        """
+        return issue.user.login
+
+    def _get_issue_commenters(self, comments: list[IssueComment.IssueComment]) -> list[str]:
+        """Retrieves the list of Github issue commenters.
+
+        Args:
+            comments (github.IssueComment.IssueComment): The list of Github issue comment objects.
+
+        Returns:
+            list: The unique list of Github issue commenters.
+        """
+        if not comments:
+            return []
+
+        # Sort the comments from oldest to newest
+        comments = sorted(comments, key=lambda c: c.created_at)
+
+        # Retain the commenters based on the order they first commented
+        comment_authors = []
+        for comment in comments:
+            if (
+                comment.user.login not in comment_authors
+                and comment.user.login != self.agent_name  # Do not include the agent-name
+            ):
+                comment_authors.append(comment.user.login)
+
+        return comment_authors
+
+    def _get_issue_latest_commenter(self, comments: list[IssueComment.IssueComment]) -> str:
+        """Retrieves the most recent Github issue commenter who mentioned the agent.
+
+        Args:
+            comments (github.IssueComment.IssueComment): The list of Github issue comment objects.
+
+        Returns:
+            str: The name of the latest Github issue commenter who mentioned the agent.
+        """
+
+        # Define the regex pattern to search for the agent-name
+        pattern = rf'@{re.escape(self.agent_name)}'
+
+        # Filter comments that mention the agent
+        comments = [
+            comment for comment in comments if re.search(pattern, comment.body)
+        ]
+
+        # Get the most recent comment that mentions the agent
+        most_recent_comment = max(comments, key=lambda c: c.created_at)
+
+        return most_recent_comment.user.login if most_recent_comment else None
+
+    def _get_issue_participants(self, issue: Issue.Issue, comments: list[IssueComment.IssueComment]) -> list[str]:
+        """Retrieves the author of the Github issue.
+
+        Args:
+            issue (github.Issue.Issue): The Github issue object.
+            comments (github.IssueComment.IssueComment): The list of Github issue comment objects.
+
+        Returns:
+            list: A list of Github issue participants.
+        """
+
+        # Define the regex pattern to search for GitHub usernames (e.g., @username)
+        pattern = r'@([a-zA-Z0-9\-_]+)'
+
+        # Search in the issue body
+        issue_participants = re.findall(pattern, issue.body)
+
+        # Search in each comment body
+        comment_participants = []
+        if comments:
+            for comment in comments:
+                comment_participants.extend(re.findall(pattern, comment.body))
+
+        # Retain a unique list of issue participants
+        participants = list(set(issue_participants + comment_participants))
+
+        # Remove the agent-name
+        if self.agent_name in participants:
+            participants.remove(self.agent_name)
+
+        return participants
+
+    def _get_issue_team_members(
+        self,
+        issue: Issue.Issue,
+        comments: list[IssueComment.IssueComment]
+    ) -> tuple[str, str, list[str], list[str]]:
+        """Retrieves the author of the Github issue
+
+        Args:
+            issue (github.Issue.Issue): The Github issue object.
+            comments (github.IssueComment.IssueComment): The list of Github issue comment objects.
+
+        Returns:
+            tuple: A tuple of user names, ({primary}, {author}, {commenters}, {participants})
+        """
+
+        # Retrieve the issue author
+        author = self._get_issue_author(issue=issue)
+
+        # Retrieve the list of issue commenters
+        commenters = self._get_issue_commenters(comments=comments)
+
+        # Retrieve the list of issue participants
+        participants = self._get_issue_participants(issue=issue, comments=comments)
+
+        # Retrieve the most recent commenter who mentioned the agent
+        primary = self._get_issue_latest_commenter(comments=comments)
+
+        # Remove the issue-athor and primary commenter from the commenters
+        #   and participants to avoid duplicate mentions
+
+        for participant in list(set([author, primary])):
+            if participant:
+                if participant in commenters:
+                    commenters.remove(participant)
+                if participant in participants:
+                    participants.remove(participant)
+
+        return (
+            primary if primary else author,
+            author,
+            commenters,
+            participants,
+        )
+
+    def _has_agent_commented(self, comments: list[IssueComment.IssueComment]):
+        """Checks if the agent has already commented on the issue.
+
+        Args:
+
+2025-08-25 18:38:06,370 - INFO - swea-agent - ========================= STEP 21 =========================
+2025-08-25 18:38:06,372 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:38:06,378 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:38:08,835 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WMwEJCC0ygHacUawD4Tb6pYCZWm', created=1756147086, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"sed -n \'200,400p\' /thomaseleff__bunsen/bunsen/issue_agent/core.py"}', name='bash'), id='call_nV3Ywg9brCimCip2zZkwtGiG', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=43, prompt_tokens=12944, total_tokens=12987, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=0, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=9088, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:38:08,839 - DEBUG - swea-lm - input_tokens=12,437, output_tokens=0, instance_cost=0.12, cost=0.01
+2025-08-25 18:38:08,840 - DEBUG - swea-lm - total_tokens_sent=123,915, total_tokens_received=0, total_cost=0.12, total_api_calls=21
+2025-08-25 18:38:08,841 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+sed -n '200,400p' /thomaseleff__bunsen/bunsen/issue_agent/core.py
+2025-08-25 18:38:09,089 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:38:09,390 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+        Args:
+            comments (list): A list of comment objects.
+
+        Returns:
+            bool: True if the agent has commented, False otherwise.
+        """
+        return any(comment.user.login == self.agent_name for comment in comments)
+
+    def _agent_should_respond(
+        self,
+        issue: Issue.Issue,
+        comments: list[IssueComment.IssueComment]
+    ) -> tuple[str, str, list[str], list[str]]:
+        """Determines whether the Bunsen issue-agent should respond.
+
+        Args:
+            issue (github.Issue.Issue): The Github issue object.
+            comments (github.IssueComment.IssueComment): The list of Github issue comment objects.
+
+        Returns:
+            bool: True if the Bunsen issue-agent should respond, false otherwise.
+        """
+
+        # Define the regex pattern to search for the agent-name
+        pattern = rf'@{re.escape(self.agent_name)}'
+
+        # Respond if the Bunsen issue-agent is mentioned in the issue body and there are
+        #   no comments yet
+
+        if not comments:
+            if re.search(pattern, issue.body):
+                return True
+
+        # Respond if there are issue comments and the Bunsen issue-agent is mentioned in the latest
+        #   comment
+
+        else:
+            most_recent_comment = max(comments, key=lambda c: c.created_at)
+            if re.search(pattern, most_recent_comment.body):
+                return True
+
+        return False
+
+    def _get_llm_response(self, role: str, prompt: str):
+        """Calls the LLM to generate a response based on the prompt.
+
+        Args:
+            role (str): The role of the LLM.
+            prompt (str): The prompt to send to the LLM.
+
+        Returns:
+            str: The generated response from the LLM, or None if an error occurs.
+        """
+        try:
+            response = llms.chat(
+                model=self.llm_model,
+                messages=[{"role": role, "content": prompt}]
+            )
+
+            # Return the message content from the llm response
+            #   The llm response is always in the openai format
+
+            return response.choices[0].message.content
+
+        except Exception as e:
+            print(f"Error generating LLM response: {e}")
+            return None
+
+    def comment(self, repo_name: str, issue_id: int):
+        """The main method to run the issue-agent's logic on a specific issue.
+
+        Args:
+            repo_name (str): The full name of the repository (e.g., 'owner/repository').
+            issue_id (int): The ID of the GitHub issue to process.
+        """
+        print(
+            f"Processing issue #{issue_id} in repository '{repo_name}' with the Bunsen issue-agent..."
+        )
+
+        issue, comments = self._get_issue_data(repo_name, issue_id)
+
+        if not issue:
+            print(f"Issue #{issue_id} does not exist in repository '{repo_name}'.")
+            return
+
+        # Determine whether the Bunsen issue-agent has been requested
+
+        #   If the Bunsen issue-agent is mentioned in the issue body and there are
+        #       no comments yet, respond to the issue.
+        #   If there are issue comments and the Bunsen issue-agent is mentioned in the latest
+        #       comment, respond to the issue.
+        #   Otherwise, skip the request.
+
+        if not self._agent_should_respond(issue=issue, comments=comments):
+            print("The Bunsen issue-agent was not mentioned in the issue and will not respond.")
+            return
+
+        # Build the prompt for the LLM
+        issue_body = issue.body if issue.body else "No description provided."
+        issue_comments = "\n\n".join(
+            f"[{comment.created_at.strftime('%Y-%m-%d %H:%M:%S')}] **{comment.user.login}** said: {comment.body}"
+            for comment in comments
+        )
+        prompt = prompts.get_issue_response_prompt(
+            agent_name=self.agent_name,
+            issue_title=issue.title,
+            issue_body=issue_body,
+            issue_comments=issue_comments,
+        )
+        print(f"The Bunsen issue-agent prompt is: {prompt}")
+
+        # Get the LLM's response
+        llm_response = self._get_llm_response(
+            role=prompts.ISSUE_AGENT_ROLE,
+            prompt=prompt
+        )
+
+        if llm_response:
+
+            # Get the issue participants
+            primary, _, _, participants = self._get_issue_team_members(
+                issue=issue,
+                comments=comments,
+            )
+
+            # Construct the comment, cc'ing the issue-participants
+            comment_body = f"@{primary}\n\n{llm_response}"
+
+            if participants:
+                comment_body = + f"\n\ncc {', '.join([f'@{p}' for p in participants])}"
+
+            # Post the response as a comment on the issue
+            self.github_client.post_comment(
+                repo_name=repo_name,
+                issue_id=issue_id,
+                comment_body=comment_body
+            )
+            print(f"The Bunsen issue-agent response is: {llm_response}.")
+
+    def dispatch_coding_agent(self, repo_name: str, issue_id: int):
+        """Dispatches the coding agent workflow for the issue.
+
+        Args:
+            repo_name (str): The full name of the repository (e.g., 'owner/repository').
+            issue_id (int): The ID of the GitHub issue to process.
+        """
+
+        # Dispatch the coding agent workflow
+        self.github_client.run_workflow_dispatch(
+            repo_name=repo_name,
+            workflow_filename=settings.GITHUB_CODING_WORKFLOW_FILENAME,
+            issue_id=issue_id,
+            branch=settings.GITHUB_MAIN_BRANCH,
+        )
+
+        # Update the Github issue with progress
+        self.github_client.post_comment(
+            repo_name=repo_name,
+            issue_id=issue_id,
+            comment_body=(
+                "Beaker (swe-agent) has been assigned to resolve this issue."
+                f" You can track the progress via [Github Actions](https://github.com/{repo_name}/actions)."
+            ),
+        )
+
+2025-08-25 18:38:09,410 - INFO - swea-agent - ========================= STEP 22 =========================
+2025-08-25 18:38:09,411 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:38:09,419 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:38:12,343 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WMzEaM8DaKLnhhkJOcXIVxPS23k', created=1756147089, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"find /thomaseleff__bunsen -type f | grep -i test"}', name='bash'), id='call_c9hWqRr4Cga39Ehj0j0sbi0t', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=169, prompt_tokens=14285, total_tokens=14454, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=128, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=9472, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:38:12,347 - DEBUG - swea-lm - input_tokens=13,776, output_tokens=0, instance_cost=0.13, cost=0.01
+2025-08-25 18:38:12,348 - DEBUG - swea-lm - total_tokens_sent=137,691, total_tokens_received=0, total_cost=0.13, total_api_calls=22
+2025-08-25 18:38:12,349 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+find /thomaseleff__bunsen -type f | grep -i test
+2025-08-25 18:38:12,597 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:38:12,850 - INFO - swea-agent - 🤖 MODEL INPUT
+Your command ran successfully and did not produce any output.
+2025-08-25 18:38:12,865 - INFO - swea-agent - ========================= STEP 23 =========================
+2025-08-25 18:38:12,867 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:38:12,874 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:38:42,565 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WN3VfEZ9AH63fzPcJJV3Tt3FzcF', created=1756147093, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"insert","path":"/thomaseleff__bunsen/bunsen/issue_agent/agent.py","insert_line":34,"new_str":"\\n\\n@app.get(\\"/healthcheck\\")\\ndef healthcheck():\\n    \\"\\"\\"Healthcheck endpoint to confirm the application is healthy.\\"\\"\\"\\n    return {\\"status\\": \\"ok\\"}\\n"}', name='str_replace_editor'), id='call_S9JgPAwqIN5xoEpQnWBuTxYM', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=2788, prompt_tokens=14341, total_tokens=17129, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=2688, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=12928, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:38:42,570 - DEBUG - swea-lm - input_tokens=13,840, output_tokens=0, instance_cost=0.15, cost=0.02
+2025-08-25 18:38:42,570 - DEBUG - swea-lm - total_tokens_sent=151,531, total_tokens_received=0, total_cost=0.15, total_api_calls=23
+2025-08-25 18:38:42,573 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+str_replace_editor insert /thomaseleff__bunsen/bunsen/issue_agent/agent.py    --new_str '
+
+@app.get("/healthcheck")
+def healthcheck():
+    """Healthcheck endpoint to confirm the application is healthy."""
+    return {"status": "ok"}
+' --insert_line 34
+2025-08-25 18:38:42,867 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:38:43,142 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+The file /thomaseleff__bunsen/bunsen/issue_agent/agent.py has been edited. Here's the result of running `cat -n` on a snippet of the edited file:
+    31	    Returns:
+    32	        PlainTextResponse: A simple status message.
+    33	    """
+    34	    return "The Bunsen issue-agent is running!"
+    35	
+    36	
+    37	@app.get("/healthcheck")
+    38	def healthcheck():
+    39	    """Healthcheck endpoint to confirm the application is healthy."""
+    40	    return {"status": "ok"}
+    41	
+    42	
+    43	
+    44	@app.post("/github-webhook")
+    45	async def github_webhook(request: Request):
+Review the changes and make sure they are as expected (correct indentation, no duplicate lines, etc). Edit the file again if necessary.
+
+2025-08-25 18:38:43,160 - INFO - swea-agent - ========================= STEP 24 =========================
+2025-08-25 18:38:43,162 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:38:43,169 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:38:57,838 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WNXo1qX9AO5zI61usMNkoP7DJJo', created=1756147123, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"sed -n \'1,100p\' /thomaseleff__bunsen/bunsen/issue_agent/agent.py"}', name='bash'), id='call_2dg6J2ulgNKVNgFu85owG0WQ', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=562, prompt_tokens=14646, total_tokens=15208, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=512, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=11392, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:38:57,842 - DEBUG - swea-lm - input_tokens=14,147, output_tokens=0, instance_cost=0.16, cost=0.01
+2025-08-25 18:38:57,843 - DEBUG - swea-lm - total_tokens_sent=165,678, total_tokens_received=0, total_cost=0.16, total_api_calls=24
+2025-08-25 18:38:57,844 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+sed -n '1,100p' /thomaseleff__bunsen/bunsen/issue_agent/agent.py
+2025-08-25 18:38:58,092 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:38:58,387 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+"""Bunsen issue-agent service"""
+
+from fastapi import FastAPI, Request, HTTPException
+import hashlib
+import hmac
+from starlette.responses import PlainTextResponse
+import uvicorn
+
+from bunsen.shared import settings
+from bunsen.issue_agent import core
+
+# Create the FastAPI application
+app = FastAPI()
+
+
+def create_issue_chat_agent(installation_id: int):
+    """Creates a new instance of the Bunsen-issue-agent with the necessary
+    GitHub App authentication details.
+    """
+    return core.Bunsen(
+        app_id=settings.GITHUB_APP_ID,
+        private_key=settings.GITHUB_PRIVATE_KEY,
+        installation_id=installation_id
+    )
+
+
+@app.get("/", status_code=200, response_class=PlainTextResponse)
+def root():
+    """A simple root endpoint to confirm the application is running.
+
+    Returns:
+        PlainTextResponse: A simple status message.
+    """
+    return "The Bunsen issue-agent is running!"
+
+
+@app.get("/healthcheck")
+def healthcheck():
+    """Healthcheck endpoint to confirm the application is healthy."""
+    return {"status": "ok"}
+
+
+
+@app.post("/github-webhook")
+async def github_webhook(request: Request):
+    """Endpoint to receive and process GitHub webhook events.
+
+    This endpoint authenticates as a GitHub App using the installation ID
+    from the webhook payload.
+
+    Args:
+        request (Request): The incoming request object from FastAPI.
+    """
+
+    # Get the event type from the headers
+    event_type = request.headers.get("X-GitHub-Event", "ping")
+
+    # Handle the 'ping' event to confirm the webhook is active
+    if event_type == "ping":
+        return {"msg": "Ping event received successfully!"}
+
+    # Otherwise, verify the webhook signature to ensure the request
+    #   is from GitHub
+
+    signature = request.headers.get("X-Hub-Signature-256")
+    if not signature:
+        raise HTTPException(
+            status_code=401, detail="X-Hub-Signature-256 header missing"
+        )
+
+    body = await request.body()
+    secret_bytes = settings.GITHUB_WEBHOOK_SECRET.encode("utf-8")
+    mac = hmac.new(secret_bytes, msg=body, digestmod=hashlib.sha256)
+    expected_signature = "sha256=" + mac.hexdigest()
+
+    if not hmac.compare_digest(expected_signature, signature):
+        raise HTTPException(
+            status_code=403, detail="X-Hub-Signature-256 header is invalid"
+        )
+
+    # Parse the request body as JSON
+    payload = await request.json()
+    action = payload.get("action")
+
+    # Extract the necessary details from the payload
+    repo_name = payload.get("repository", {}).get("full_name")
+    issue_id = payload.get("issue", {}).get("number")
+    installation_id = payload.get("installation", {}).get("id")
+
+    # Extract the sender's login to avoid the agent responding to its own comments
+    sender_login = payload.get("sender", {}).get("login")
+
+    # If any required information is missing, stop processing.
+    if not all([installation_id, repo_name, issue_id]):
+        print("Missing required information in the webhook payload. Ignoring event.")
+        return {"msg": "Payload incomplete. Ignoring..."}
+
+    # Instantiate the agent using the new credentials.
+    try:
+        bunsen = create_issue_chat_agent(installation_id=installation_id)
+
+2025-08-25 18:38:58,409 - INFO - swea-agent - ========================= STEP 25 =========================
+2025-08-25 18:38:58,410 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:38:58,418 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:39:03,831 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WNmON4kFPH6akSRkaeYHaEIUMHt', created=1756147138, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"find /thomaseleff__bunsen -maxdepth 2 -type f | grep -i test"}', name='bash'), id='call_0KXZxqYRbcvdgV1iqx7iDBZv', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=323, prompt_tokens=15417, total_tokens=15740, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=256, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=14336, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:39:03,835 - DEBUG - swea-lm - input_tokens=14,919, output_tokens=0, instance_cost=0.16, cost=0.01
+2025-08-25 18:39:03,836 - DEBUG - swea-lm - total_tokens_sent=180,597, total_tokens_received=0, total_cost=0.16, total_api_calls=25
+2025-08-25 18:39:03,837 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+find /thomaseleff__bunsen -maxdepth 2 -type f | grep -i test
+2025-08-25 18:39:04,084 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:39:04,345 - INFO - swea-agent - 🤖 MODEL INPUT
+Your command ran successfully and did not produce any output.
+2025-08-25 18:39:04,365 - INFO - swea-agent - ========================= STEP 26 =========================
+2025-08-25 18:39:04,366 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:39:04,374 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:39:10,328 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WNt05i6zHQ9bjv3m3iMUWPIVvL0', created=1756147145, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"ls -R /thomaseleff__bunsen/.bunsen"}', name='bash'), id='call_V6bwo6hqH6WYcavRDhwkGVEt', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=384, prompt_tokens=15478, total_tokens=15862, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=320, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=15360, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:39:10,333 - DEBUG - swea-lm - input_tokens=14,988, output_tokens=0, instance_cost=0.17, cost=0.01
+2025-08-25 18:39:10,333 - DEBUG - swea-lm - total_tokens_sent=195,585, total_tokens_received=0, total_cost=0.17, total_api_calls=26
+2025-08-25 18:39:10,335 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+ls -R /thomaseleff__bunsen/.bunsen
+2025-08-25 18:39:10,581 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:39:10,856 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+/thomaseleff__bunsen/.bunsen:
+issue_agent.yaml  settings.yaml  swe_agent.yaml
+
+2025-08-25 18:39:10,877 - INFO - swea-agent - ========================= STEP 27 =========================
+2025-08-25 18:39:10,879 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:39:10,887 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:39:19,607 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WNzwEHwRcfJ7I1EIFPjltEIpoad', created=1756147151, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"xxd -p -l 200 /thomaseleff__bunsen/coverage/COVERAGE.md"}', name='bash'), id='call_vCDF8pyyXkj8OL0c4OGX9umO', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=750, prompt_tokens=15550, total_tokens=16300, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=704, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=0, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:39:19,612 - DEBUG - swea-lm - input_tokens=15,066, output_tokens=0, instance_cost=0.19, cost=0.02
+2025-08-25 18:39:19,613 - DEBUG - swea-lm - total_tokens_sent=210,651, total_tokens_received=0, total_cost=0.19, total_api_calls=27
+2025-08-25 18:39:19,614 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+xxd -p -l 200 /thomaseleff__bunsen/coverage/COVERAGE.md
+2025-08-25 18:39:19,859 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:39:20,148 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+bash: xxd: command not found
+
+2025-08-25 18:39:20,172 - INFO - swea-agent - ========================= STEP 28 =========================
+2025-08-25 18:39:20,174 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:39:20,182 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:39:41,585 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WO8R5yshql9RDX9NWCcybEt3ZqR', created=1756147160, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"sed -n \'1,200p\' /thomaseleff__bunsen/requirements.txt"}', name='bash'), id='call_v4gbj8Eiken2YeK3x9z1ZSal', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=1969, prompt_tokens=15613, total_tokens=17582, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=1920, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=14592, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:39:41,590 - DEBUG - swea-lm - input_tokens=15,134, output_tokens=0, instance_cost=0.20, cost=0.01
+2025-08-25 18:39:41,591 - DEBUG - swea-lm - total_tokens_sent=225,785, total_tokens_received=0, total_cost=0.20, total_api_calls=28
+2025-08-25 18:39:41,592 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+sed -n '1,200p' /thomaseleff__bunsen/requirements.txt
+2025-08-25 18:39:41,839 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:39:42,111 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+fastapi==0.116.1
+uvicorn[standard]==0.35.0
+litellm==1.75.5.post2
+PyGithub==2.7.0
+python-dotenv==1.1.1
+
+2025-08-25 18:39:42,136 - INFO - swea-agent - ========================= STEP 29 =========================
+2025-08-25 18:39:42,138 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:39:42,146 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:40:02,704 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WOUHrV5frjD8L3f7OQca2XT25gO', created=1756147182, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"sed -n \'1,50p\' /thomaseleff__bunsen/coverage/COVERAGE.md"}', name='bash'), id='call_65hQaVGHBOODB0pw3oTbMH1p', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=1839, prompt_tokens=15716, total_tokens=17555, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=1792, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=15360, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:40:02,708 - DEBUG - swea-lm - input_tokens=15,242, output_tokens=0, instance_cost=0.22, cost=0.01
+2025-08-25 18:40:02,709 - DEBUG - swea-lm - total_tokens_sent=241,027, total_tokens_received=0, total_cost=0.22, total_api_calls=29
+2025-08-25 18:40:02,710 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+sed -n '1,50p' /thomaseleff__bunsen/coverage/COVERAGE.md
+2025-08-25 18:40:02,960 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:40:03,229 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+\xff\xfe|   N a m e                                                                             |         S t m t s   |           M i s s   |       C o v e r   |       M i s s i n g   |  
+ | - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -   |   - - - - - - - :   |   - - - - - - - :   |   - - - - - - :   |   - - - - - - - - :   |  
+ |   b u n s e n \ \ _ \ _ i n i t \ _ \ _ . p y                                         |                 0   |                 0   |         1 0 0 %   |                       |  
+ |   b u n s e n \ i s s u e \ _ c h a t \ _ a g e n t \ \ _ \ _ i n i t \ _ \ _ . p y   |                 2   |                 0   |         1 0 0 %   |                       |  
+ |   b u n s e n \ i s s u e \ _ c h a t \ _ a g e n t \ a p p . p y                     |               4 7   |               2 9   |           3 8 %   | 2 9 ,   4 0 ,   5 5 - 1 0 0 ,   1 0 5 - 1 1 5   |  
+ |   b u n s e n \ i s s u e \ _ c h a t \ _ a g e n t \ c o r e . p y                   |               5 4   |               1 7   |           6 9 %   | 3 1 ,   3 3 ,   4 4 ,   1 0 8 - 1 3 9   |  
+ |   b u n s e n \ i s s u e \ _ c h a t \ _ a g e n t \ p r o m p t s . p y             |                 3   |                 1   |           6 7 %   |                 3 0   |  
+ |   b u n s e n \ s h a r e d \ \ _ \ _ i n i t \ _ \ _ . p y                           |                 2   |                 0   |         1 0 0 %   |                       |  
+ |   b u n s e n \ s h a r e d \ g i t h u b \ _ c l i e n t . p y                       |             1 1 1   |               9 9   |           1 1 %   | 2 1 - 2 7 ,   3 9 - 4 4 ,   5 8 - 6 6 ,   8 0 - 8 7 ,   9 9 - 1 0 5 ,   1 1 8 - 1 2 4 ,   1 4 1 - 1 5 1 ,   1 6 8 - 1 8 2 ,   2 0 6 - 2 5 0 ,   2 7 6 - 2 9 5   |  
+ |   b u n s e n \ s h a r e d \ p e r s o n a s . p y                                   |                 6   |                 0   |         1 0 0 %   |                       |  
+ |   b u n s e n \ s h a r e d \ y a m l \ _ u t i l s . p y                             |                 9   |                 1   |           8 9 %   |                 2 1   |  
+ |                                                                   * * T O T A L * *   |     * * 2 3 4 * *   |     * * 1 4 7 * *   |   * * 3 7 % * *   |                       |  
+ 
+2025-08-25 18:40:03,257 - INFO - swea-agent - ========================= STEP 30 =========================
+2025-08-25 18:40:03,259 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:40:03,268 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:40:20,470 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WOq4HjhN0CqqpvkVMhvu73LcZME', created=1756147204, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"cd /thomaseleff__bunsen && python3 - << \'EOF\'\\nfrom starlette.testclient import TestClient\\nfrom bunsen.issue_agent.agent import app\\nclient = TestClient(app)\\nr = client.get(\'/healthcheck\')\\nprint(r.status_code, r.json())\\nEOF"}', name='bash'), id='call_jKgirksfmGgyXN6Mcyd1h6gk', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=1303, prompt_tokens=18141, total_tokens=19444, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=1216, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=14208, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:40:20,474 - DEBUG - swea-lm - input_tokens=17,672, output_tokens=0, instance_cost=0.23, cost=0.01
+2025-08-25 18:40:20,475 - DEBUG - swea-lm - total_tokens_sent=258,699, total_tokens_received=0, total_cost=0.23, total_api_calls=30
+2025-08-25 18:40:20,476 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+cd /thomaseleff__bunsen && python3 - << 'EOF'
+from starlette.testclient import TestClient
+from bunsen.issue_agent.agent import app
+client = TestClient(app)
+r = client.get('/healthcheck')
+print(r.status_code, r.json())
+EOF
+2025-08-25 18:40:20,841 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:40:21,140 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ModuleNotFoundError: No module named 'starlette'
+
+2025-08-25 18:40:21,167 - INFO - swea-agent - ========================= STEP 31 =========================
+2025-08-25 18:40:21,169 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:40:21,178 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:40:40,630 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WP7RkTbq9yKlKYHUNo8hOBOH8W6', created=1756147221, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"python3 - << \'EOF\'\\nimport fastapi\\nprint(fastapi.__version__)\\nEOF"}', name='bash'), id='call_62LqQPRWGBTwaEms0HlWPOM0', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=1964, prompt_tokens=18269, total_tokens=20233, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=1920, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=15616, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:40:40,634 - DEBUG - swea-lm - input_tokens=17,806, output_tokens=0, instance_cost=0.25, cost=0.02
+2025-08-25 18:40:40,635 - DEBUG - swea-lm - total_tokens_sent=276,505, total_tokens_received=0, total_cost=0.25, total_api_calls=31
+2025-08-25 18:40:40,636 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+python3 - << 'EOF'
+import fastapi
+print(fastapi.__version__)
+EOF
+2025-08-25 18:40:40,996 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:40:41,276 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+ModuleNotFoundError: No module named 'fastapi'
+
+2025-08-25 18:40:41,305 - INFO - swea-agent - ========================= STEP 32 =========================
+2025-08-25 18:40:41,307 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:40:41,315 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:40:51,834 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WPRd5Q0aQD9Clzy2Eoftv5Owe9e', created=1756147241, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"sed -n \'1,200p\' /thomaseleff__bunsen/.bunsen/issue_agent.yaml"}', name='bash'), id='call_W6lCxdE6djiGfZTPZ0HgPYSJ', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=817, prompt_tokens=18354, total_tokens=19171, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=768, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=18048, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:40:51,839 - DEBUG - swea-lm - input_tokens=17,894, output_tokens=0, instance_cost=0.26, cost=0.01
+2025-08-25 18:40:51,839 - DEBUG - swea-lm - total_tokens_sent=294,399, total_tokens_received=0, total_cost=0.26, total_api_calls=32
+2025-08-25 18:40:51,841 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+sed -n '1,200p' /thomaseleff__bunsen/.bunsen/issue_agent.yaml
+2025-08-25 18:40:52,087 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:40:52,390 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+agent:
+  templates:
+    system_template: |-
+      You are an intelligent and friendly product / business analyst AI agent. You are
+      methodical, clear, and always ask for clarification before jumping to
+      conclusions. You do not use emojis.
+
+2025-08-25 18:40:52,421 - INFO - swea-agent - ========================= STEP 33 =========================
+2025-08-25 18:40:52,423 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:40:52,432 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:41:03,799 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WPcGJpDSNaDObbaWpQaF4DTF7RF', created=1756147252, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"sed -n \'1,200p\' /thomaseleff__bunsen/Dockerfile"}', name='bash'), id='call_YXIxAxETimMFqynwnAsX1vWC', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=748, prompt_tokens=18463, total_tokens=19211, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=704, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=18176, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:41:03,803 - DEBUG - swea-lm - input_tokens=18,011, output_tokens=0, instance_cost=0.26, cost=0.01
+2025-08-25 18:41:03,804 - DEBUG - swea-lm - total_tokens_sent=312,410, total_tokens_received=0, total_cost=0.26, total_api_calls=33
+2025-08-25 18:41:03,805 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+sed -n '1,200p' /thomaseleff__bunsen/Dockerfile
+2025-08-25 18:41:04,052 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:41:04,324 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+# Set the operating-system
+FROM python:3.12-slim AS base
+
+# Set the working directory
+WORKDIR /bunsen
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Clone the repository
+
+# Run `docker build --no-cache-filter clone .` to always ensure the
+#   remote repository is re-cloned when the image is rebuilt
+
+FROM base AS clone
+RUN git clone https://github.com/thomaseleff/bunsen.git /bunsen
+
+# Install Python dependencies
+RUN python -m pip install --upgrade pip
+RUN pip install .
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+
+# Expose the port
+EXPOSE 8000
+
+# Run the Bunsen issue-agent
+CMD ["python", "-m", "bunsen.issue_agent.agent"]
+
+2025-08-25 18:41:04,358 - INFO - swea-agent - ========================= STEP 34 =========================
+2025-08-25 18:41:04,360 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:41:04,369 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:41:30,291 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WPo8XUIceO6iy49PF11axXBju24', created=1756147264, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"sed -n \'1,200p\' /thomaseleff__bunsen/setup.cfg"}', name='bash'), id='call_y7tnDaM4AQvXiM0mI6Rc1lP2', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=2802, prompt_tokens=18719, total_tokens=21521, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=2752, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=18432, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:41:30,295 - DEBUG - swea-lm - input_tokens=18,267, output_tokens=0, instance_cost=0.28, cost=0.02
+2025-08-25 18:41:30,296 - DEBUG - swea-lm - total_tokens_sent=330,677, total_tokens_received=0, total_cost=0.28, total_api_calls=34
+2025-08-25 18:41:30,297 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+sed -n '1,200p' /thomaseleff__bunsen/setup.cfg
+2025-08-25 18:41:30,544 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:41:30,804 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+[metadata]
+name = bunsen
+description = `bunsen` is an open-source multi-agent duo for streamlined software development.
+long_description = file: README.md
+long_description_content_type = text/markdown
+author = Tom Eleff
+project_urls =
+    Issues = https://github.com/thomaseleff/bunsen/issues
+    Releases = https://github.com/thomaseleff/bunsen/releases
+classifiers =
+    Development Status :: 4 - Beta
+    Programming Language :: Python :: 3.11
+    Programming Language :: Python :: 3.12
+
+[options]
+packages = find:
+include_package_data = True
+python_requires = >=3.11.0
+install_requires = 
+    fastapi
+    uvicorn[standard]
+    litellm
+    PyGithub
+    python-dotenv
+    pytest
+    coverage
+2025-08-25 18:41:30,839 - INFO - swea-agent - ========================= STEP 35 =========================
+2025-08-25 18:41:30,841 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:41:30,850 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:41:47,878 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WQFtAgSqc2EjqYkETNvkFRwJMaI', created=1756147291, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"python3 -m pip --version"}', name='bash'), id='call_r9pAXbAA7Z1PAZRPEUeAJJtF', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=1693, prompt_tokens=18947, total_tokens=20640, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=1664, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=18688, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:41:47,883 - DEBUG - swea-lm - input_tokens=18,504, output_tokens=0, instance_cost=0.29, cost=0.01
+2025-08-25 18:41:47,884 - DEBUG - swea-lm - total_tokens_sent=349,181, total_tokens_received=0, total_cost=0.29, total_api_calls=35
+2025-08-25 18:41:47,885 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+python3 -m pip --version
+2025-08-25 18:41:48,400 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:41:48,681 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+pip 24.0 from /usr/local/lib/python3.11/site-packages/pip (python 3.11)
+
+2025-08-25 18:41:48,717 - INFO - swea-agent - ========================= STEP 36 =========================
+2025-08-25 18:41:48,719 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:41:48,728 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:41:59,146 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WQWuBxLFD7N9l0e11hFKc5zDTsh', created=1756147308, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"cd /thomaseleff__bunsen && pip install -q ."}', name='bash'), id='call_ZTP1VWUrjYSmlclpciRZRzRL', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=999, prompt_tokens=19010, total_tokens=20009, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=960, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=18944, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:41:59,237 - DEBUG - swea-lm - input_tokens=18,572, output_tokens=0, instance_cost=0.30, cost=0.01
+2025-08-25 18:41:59,238 - DEBUG - swea-lm - total_tokens_sent=367,753, total_tokens_received=0, total_cost=0.30, total_api_calls=36
+2025-08-25 18:41:59,240 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+cd /thomaseleff__bunsen && pip install -q .
+2025-08-25 18:42:21,031 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:42:21,349 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+
+[notice] A new release of pip is available: 24.0 -> 25.2
+[notice] To update, run: pip install --upgrade pip
+
+2025-08-25 18:42:21,389 - INFO - swea-agent - ========================= STEP 37 =========================
+2025-08-25 18:42:21,391 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:42:21,401 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:42:23,797 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WR3Z6PbWextXjYHFG3socxiAuBN', created=1756147341, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"cd /thomaseleff__bunsen && python3 - << \'EOF\'\\nfrom fastapi.testclient import TestClient\\nfrom bunsen.issue_agent.agent import app\\nclient = TestClient(app)\\nr = client.get(\'/healthcheck\')\\nprint(r.status_code, r.json())\\nEOF"}', name='bash'), id='call_TjJuyTF6xbG1DDz3Vec4atqu', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=81, prompt_tokens=19139, total_tokens=19220, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=0, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=18304, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:42:23,802 - DEBUG - swea-lm - input_tokens=18,704, output_tokens=0, instance_cost=0.31, cost=0.01
+2025-08-25 18:42:23,803 - DEBUG - swea-lm - total_tokens_sent=386,457, total_tokens_received=0, total_cost=0.31, total_api_calls=37
+2025-08-25 18:42:23,804 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+cd /thomaseleff__bunsen && python3 - << 'EOF'
+from fastapi.testclient import TestClient
+from bunsen.issue_agent.agent import app
+client = TestClient(app)
+r = client.get('/healthcheck')
+print(r.status_code, r.json())
+EOF
+2025-08-25 18:42:26,456 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:42:26,734 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+  File "/thomaseleff__bunsen/bunsen/issue_agent/agent.py", line 9, in <module>
+    from bunsen.shared import settings
+  File "/thomaseleff__bunsen/bunsen/shared/__init__.py", line 3, in <module>
+    from bunsen.shared import github, llms, settings, yaml_utils
+  File "/thomaseleff__bunsen/bunsen/shared/llms.py", line 6, in <module>
+    from bunsen.shared import settings
+  File "/thomaseleff__bunsen/bunsen/shared/settings.py", line 162, in <module>
+    raise EnvironmentError(
+OSError: The following required environment variables or settings from `settings.yaml` are missing: [env > BUNSEN_GITHUB_APP_ID, env > BUNSEN_GITHUB_PRIVATE_KEY, env > BUNSEN_GITHUB_WEBHOOK_SECRET].
+
+2025-08-25 18:42:26,776 - INFO - swea-agent - ========================= STEP 38 =========================
+2025-08-25 18:42:26,778 - DEBUG - swea-lm - n_cache_control: 2
+2025-08-25 18:42:26,788 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:42:47,079 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WR98QWegnni4Ek9RecGVgHy6gbI', created=1756147347, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"sed -n \'1,200p\' /thomaseleff__bunsen/bunsen/shared/settings.py"}', name='bash'), id='call_Q91oEzPd9qdcZg9uxgEPdMtt', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=1915, prompt_tokens=19460, total_tokens=21375, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=1856, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=18944, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:42:47,084 - DEBUG - swea-lm - input_tokens=19,030, output_tokens=0, instance_cost=0.33, cost=0.01
+2025-08-25 18:42:47,084 - DEBUG - swea-lm - total_tokens_sent=405,487, total_tokens_received=0, total_cost=0.33, total_api_calls=38
+2025-08-25 18:42:47,086 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+sed -n '1,200p' /thomaseleff__bunsen/bunsen/shared/settings.py
+2025-08-25 18:42:47,337 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:42:47,601 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+"""Environment and settings"""
+
+import dotenv
+from pathlib import Path
+import os
+
+from bunsen.shared import yaml_utils
+
+# Default settings location
+DEFAULT_SETTINGS_PATH = Path(Path.cwd(), ".bunsen", "settings.yaml")
+DEFAULT_ISSUE_AGENT_SETTINGS_PATH = Path(Path.cwd(), ".bunsen", "issue_agent.yaml")
+DEFAULT_SWE_AGENT_SETTINGS_PATH = Path(Path.cwd(), ".bunsen", "swe_agent.yaml")
+
+# Default model settings
+DEFAULT_ISSUE_AGENT_SETTINGS = {  # This `.yaml` config has limited settings
+    "agent": {
+        "templates": {
+            "system_template": """
+                You are an intelligent and friendly product / business analyst AI agent. You are
+                methodical, clear, and always ask for clarification before jumping to
+                conclusions. You do not use emojis.
+            """
+        }
+    }
+}
+DEFAULT_SWE_AGENT_SETTINGS = {  # This `.yaml` config is defined by `swe-agent`
+    "agent": {
+        "templates": {
+            "system_template": "You are a helpful assistant that can interact with a computer to solve tasks.",
+            "instance_template": """
+                <uploaded_files>
+                {{working_dir}}
+                </uploaded_files>
+                I've uploaded a python code repository in the directory {{working_dir}}. Consider the following PR description:
+
+                <pr_description>
+                {{problem_statement}}
+                </pr_description>
+
+                Can you help me implement the necessary changes to the repository so that the requirements specified in the <pr_description> are met?
+                I've already taken care of all changes to any of the test files described in the <pr_description>. This means you DON'T have to modify the testing logic or any of the tests in any way!
+                Your task is to make the minimal changes to non-tests files in the {{working_dir}} directory to ensure the <pr_description> is satisfied.
+                Follow these steps to resolve the issue:
+                1. As a first step, it might be a good idea to find and read code relevant to the <pr_description>
+                2. Create a script to reproduce the error and execute it with `python <filename.py>` using the bash tool, to confirm the error
+                3. Edit the sourcecode of the repo to resolve the issue
+                4. Rerun your reproduce script and confirm that the error is fixed!
+                5. Think about edgecases and make sure your fix handles them as well
+                Your thinking should be thorough and so it's fine if it's very long.
+            """,
+            "next_step_template": """
+                OBSERVATION:
+                {{observation}}
+            """,
+            "next_step_no_output_template": "Your command ran successfully and did not produce any output."
+        },
+        "tools": {
+            "env_variables": {
+                "PAGER": "cat",
+                "MANPAGER": "cat",
+                "LESS": "-R",
+                "PIP_PROGRESS_BAR": "off",
+                "TQDM_DISABLE": "1",
+                "GIT_PAGER": "cat"
+            },
+            "bundles": [
+                {
+                    "path": "tools/registry"
+                },
+                {
+                    "path": "tools/edit_anthropic"
+                },
+                {
+                    "path": "tools/review_on_submit_m"
+                }
+            ],
+            "registry_variables": {
+                "USE_FILEMAP": "true",
+                "SUBMIT_REVIEW_MESSAGES": [
+                    "Thank you for your work on this issue. Please carefully follow the steps below to help review your changes.\n\n1. If you made any changes to your code after running the reproduction script, please run the reproduction script again.\n  If the reproduction script is failing, please revisit your changes and make sure they are correct.\n  If you have already removed your reproduction script, please ignore this step.\n2. Remove your reproduction script (if you haven't done so already).\n3. If you have modified any TEST files, please revert them to the state they had before you started fixing the issue.\n  You can do this with `git checkout -- /path/to/test/file.py`. Use below <diff> to find the files you need to revert.\n4. Run the submit command again to confirm.\n\nHere is a list of all of your changes:\n\n<diff>\n{{diff}}\n</diff>\n"
+                ]
+            },
+            "enable_bash_tool": True,
+            "parse_function": {
+                "type": "function_calling"
+            }
+        },
+        "history_processors": [
+            {
+                "type": "cache_control",
+                "last_n_messages": 2
+            }
+        ],
+        "model": {
+            "temperature": 1.0,
+            "completion_kwargs": {
+                "reasoning_effort": "high"
+            }
+        }
+    }
+}
+
+if not DEFAULT_SETTINGS_PATH.exists():
+    raise FileNotFoundError(
+        f"The `settings.yaml` configuration file cannot be found at {DEFAULT_SETTINGS_PATH}."
+    )
+
+# Load environment
+dotenv.load_dotenv()
+
+# Load settings
+SETTINGS = yaml_utils.load_yaml_file(DEFAULT_SETTINGS_PATH)
+
+# Load model settings
+if DEFAULT_ISSUE_AGENT_SETTINGS_PATH.exists():
+    ISSUE_AGENT = yaml_utils.load_yaml_file(DEFAULT_ISSUE_AGENT_SETTINGS_PATH)
+else:
+    ISSUE_AGENT = DEFAULT_ISSUE_AGENT_SETTINGS.copy()
+
+    # Create the `.yaml` configuration when it does not exist
+    yaml_utils.dump_yaml_file(DEFAULT_ISSUE_AGENT_SETTINGS_PATH, DEFAULT_ISSUE_AGENT_SETTINGS)
+
+if DEFAULT_SWE_AGENT_SETTINGS_PATH.exists():
+    SWE_AGENT = yaml_utils.load_yaml_file(DEFAULT_SWE_AGENT_SETTINGS_PATH)
+else:
+    SWE_AGENT = DEFAULT_SWE_AGENT_SETTINGS.copy()
+
+    # Create the `.yaml` configuration when it does not exist
+    yaml_utils.dump_yaml_file(DEFAULT_SWE_AGENT_SETTINGS_PATH, DEFAULT_SWE_AGENT_SETTINGS)
+
+# Constants
+GITHUB_APP_ID = os.getenv("BUNSEN_GITHUB_APP_ID")
+GITHUB_PRIVATE_KEY = os.getenv("BUNSEN_GITHUB_PRIVATE_KEY")
+GITHUB_WEBHOOK_SECRET = os.getenv("BUNSEN_GITHUB_WEBHOOK_SECRET")
+GITHUB_REPO_URL = SETTINGS.get("github", {}).get("repo_url")
+GITHUB_MAIN_BRANCH = SETTINGS.get("github", {}).get("main_branch")
+GITHUB_CODING_TRIGGER_LABEL = SETTINGS.get("github", {}).get("coding_trigger_label")
+GITHUB_CODING_WORKFLOW_FILENAME = SETTINGS.get("github", {}).get("coding_workflow_filename")
+
+BUNSEN_MODEL_NAME = SETTINGS.get("llm", {}).get("bunsen_model_name")
+BEAKER_MODEL_NAME = SETTINGS.get("llm", {}).get("beaker_model_name")
+
+# Construct a dictionary of constants
+_constants = {
+    "env > BUNSEN_GITHUB_APP_ID": GITHUB_APP_ID,
+    "env > BUNSEN_GITHUB_PRIVATE_KEY": GITHUB_PRIVATE_KEY,
+    "env > BUNSEN_GITHUB_WEBHOOK_SECRET": GITHUB_WEBHOOK_SECRET,
+    "settings > github > repo_url": GITHUB_REPO_URL,
+    "settings > github > main_branch": GITHUB_MAIN_BRANCH,
+    "settings > github > coding_trigger_label": GITHUB_CODING_TRIGGER_LABEL,
+    "settings > github > coding_workflow_filename":  GITHUB_CODING_WORKFLOW_FILENAME,
+    "llm > bunsen_model_name": BUNSEN_MODEL_NAME,
+    "llm > beaker_model_name": BEAKER_MODEL_NAME,
+}
+
+# Identify missing constants
+missing_constants = [
+    constant for constant in _constants.keys() if not _constants.get(constant)
+]
+
+if missing_constants:
+    raise EnvironmentError(
+        "The following required environment variables"
+        f" or settings from `settings.yaml` are missing: [{', '.join(missing_constants)}]."
+    )
+
+2025-08-25 18:42:47,651 - INFO - swea-agent - ========================= STEP 39 =========================
+2025-08-25 18:42:47,653 - DEBUG - swea-lm - n_cache_control: 3
+2025-08-25 18:42:47,664 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:43:00,677 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WRUAE1rrPcTLq1lqZxshqelT26b', created=1756147368, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"sed -n \'1,200p\' /thomaseleff__bunsen/.bunsen/settings.yaml"}', name='bash'), id='call_h1DPelL9lVPgRAiSvvozZpwR', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=1135, prompt_tokens=21134, total_tokens=22269, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=1088, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=19456, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:43:00,681 - DEBUG - swea-lm - input_tokens=20,691, output_tokens=0, instance_cost=0.34, cost=0.01
+2025-08-25 18:43:00,682 - DEBUG - swea-lm - total_tokens_sent=426,178, total_tokens_received=0, total_cost=0.34, total_api_calls=39
+2025-08-25 18:43:00,683 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+sed -n '1,200p' /thomaseleff__bunsen/.bunsen/settings.yaml
+2025-08-25 18:43:00,932 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:43:01,215 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+github:
+  repo_url: https://github.com/thomaseleff/bunsen
+  main_branch: main
+  coding_trigger_label: ready-for-dev
+  coding_workflow_filename: swe_agent.yaml
+
+llm:
+  bunsen_model_name: openai/gpt-5
+  beaker_model_name: openai/o4-mini
+
+2025-08-25 18:43:01,262 - INFO - swea-agent - ========================= STEP 40 =========================
+2025-08-25 18:43:01,265 - DEBUG - swea-lm - n_cache_control: 3
+2025-08-25 18:43:01,276 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:43:27,903 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WRhqru7MbSz10U6DcUZqvpDBkx4', created=1756147381, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"str_replace","path":"/thomaseleff__bunsen/bunsen/issue_agent/agent.py","old_str":"@app.get(\\"/healthcheck\\")\\ndef healthcheck():\\n    \\"\\"\\"Healthcheck endpoint to confirm the application is healthy.\\"\\"\\"\\n    return {\\"status\\": \\"ok\\"}","new_str":"@app.get(\\"/health\\")\\n@app.get(\\"/healthcheck\\")\\ndef health():\\n    \\"\\"\\"Health endpoint to confirm the application is healthy.\\"\\"\\"\\n    return {\\"status\\": \\"ok\\"}"}', name='str_replace_editor'), id='call_kIlnYVzziG0aBKmUXxbrQ2np', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=2705, prompt_tokens=21261, total_tokens=23966, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=2560, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=15488, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:43:27,908 - DEBUG - swea-lm - input_tokens=20,824, output_tokens=0, instance_cost=0.36, cost=0.02
+2025-08-25 18:43:27,909 - DEBUG - swea-lm - total_tokens_sent=447,002, total_tokens_received=0, total_cost=0.36, total_api_calls=40
+2025-08-25 18:43:27,911 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+str_replace_editor str_replace /thomaseleff__bunsen/bunsen/issue_agent/agent.py   --old_str '@app.get("/healthcheck")
+def healthcheck():
+    """Healthcheck endpoint to confirm the application is healthy."""
+    return {"status": "ok"}' --new_str '@app.get("/health")
+@app.get("/healthcheck")
+def health():
+    """Health endpoint to confirm the application is healthy."""
+    return {"status": "ok"}'
+2025-08-25 18:43:28,214 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:43:28,486 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+The file /thomaseleff__bunsen/bunsen/issue_agent/agent.py has been edited. Here's the result of running `cat -n` on a snippet of /thomaseleff__bunsen/bunsen/issue_agent/agent.py:
+    32	        PlainTextResponse: A simple status message.
+    33	    """
+    34	    return "The Bunsen issue-agent is running!"
+    35	
+    36	
+    37	@app.get("/health")
+    38	@app.get("/healthcheck")
+    39	def health():
+    40	    """Health endpoint to confirm the application is healthy."""
+    41	    return {"status": "ok"}
+    42	
+    43	
+    44	
+Review the changes and make sure they are as expected. Edit the file again if necessary.
+
+2025-08-25 18:43:28,540 - INFO - swea-agent - ========================= STEP 41 =========================
+2025-08-25 18:43:28,542 - DEBUG - swea-lm - n_cache_control: 3
+2025-08-25 18:43:28,553 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:43:39,927 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WS87ktLLGLNwkBkP932SQY0waQt', created=1756147408, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"pip list","timeout":120000}', name='bash'), id='call_sSQVuCFDLzTJXH7R5hP7v2N3', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=1117, prompt_tokens=21596, total_tokens=22713, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=1088, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=21120, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:43:39,931 - DEBUG - swea-lm - input_tokens=21,162, output_tokens=0, instance_cost=0.37, cost=0.01
+2025-08-25 18:43:39,932 - DEBUG - swea-lm - total_tokens_sent=468,164, total_tokens_received=0, total_cost=0.37, total_api_calls=41
+2025-08-25 18:43:39,933 - WARNING - swea-agent - Requerying model after FunctionCallingFormatError (1th requery)
+2025-08-25 18:43:40,223 - WARNING - swea-agent - Your action could not be parsed properly: Unexpected argument(s): timeout.
+Make sure your function call doesn't include any extra arguments that are not in the allowed arguments, and only use the allowed commands.
+2025-08-25 18:43:40,226 - DEBUG - swea-lm - n_cache_control: 3
+2025-08-25 18:43:40,237 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:44:06,718 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WSLE2q0pRS7YmoSOj6HbkSHBZg3', created=1756147421, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{"command":"cd /thomaseleff__bunsen && pip install -q . && python3 - << \'EOF\'\\nimport os\\nos.environ[\\"BUNSEN_GITHUB_APP_ID\\"] = \\"1\\"\\nos.environ[\\"BUNSEN_GITHUB_PRIVATE_KEY\\"] = \\"dummy\\"\\nos.environ[\\"BUNSEN_GITHUB_WEBHOOK_SECRET\\"] = \\"secret\\"\\nfrom fastapi.testclient import TestClient\\nfrom bunsen.issue_agent.agent import app\\nclient = TestClient(app)\\nfor path in [\\"/\\", \\"/health\\", \\"/healthcheck\\"]:\\n    r = client.get(path)\\n    content_type = r.headers.get(\'content-type\',\'\')\\n    body = r.json() if content_type.startswith(\'application/json\') else r.text\\n    print(path, r.status_code, body)\\nEOF"}', name='bash'), id='call_rRtRfWvbxpPu7oGPVE1XOKTO', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=2183, prompt_tokens=21645, total_tokens=23828, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=1984, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=21504, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:44:06,724 - DEBUG - swea-lm - input_tokens=21,210, output_tokens=0, instance_cost=0.39, cost=0.02
+2025-08-25 18:44:06,724 - DEBUG - swea-lm - total_tokens_sent=489,374, total_tokens_received=0, total_cost=0.39, total_api_calls=42
+2025-08-25 18:44:06,726 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+cd /thomaseleff__bunsen && pip install -q . && python3 - << 'EOF'
+import os
+os.environ["BUNSEN_GITHUB_APP_ID"] = "1"
+os.environ["BUNSEN_GITHUB_PRIVATE_KEY"] = "dummy"
+os.environ["BUNSEN_GITHUB_WEBHOOK_SECRET"] = "secret"
+from fastapi.testclient import TestClient
+from bunsen.issue_agent.agent import app
+client = TestClient(app)
+for path in ["/", "/health", "/healthcheck"]:
+    r = client.get(path)
+    content_type = r.headers.get('content-type','')
+    body = r.json() if content_type.startswith('application/json') else r.text
+    print(path, r.status_code, body)
+EOF
+2025-08-25 18:44:14,308 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:44:14,609 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+
+[notice] A new release of pip is available: 24.0 -> 25.2
+[notice] To update, run: pip install --upgrade pip
+/ 200 The Bunsen issue-agent is running!
+/health 200 {'status': 'ok'}
+/healthcheck 200 {'status': 'ok'}
+
+2025-08-25 18:44:14,669 - INFO - swea-agent - ========================= STEP 43 =========================
+2025-08-25 18:44:14,672 - DEBUG - swea-lm - n_cache_control: 3
+2025-08-25 18:44:14,683 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:44:29,788 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WSsxe4q93B3jWziEbixLjXLdl8e', created=1756147454, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='stop', index=0, message=Message(content='I’ve added a simple health endpoint to the Issue Agent FastAPI app. You can now GET both `/health` and `/healthcheck` and receive a 200 OK with JSON `{"status":"ok"}`. Here’s a quick manual verification via TestClient:\n\n```\n>>> from fastapi.testclient import TestClient\n>>> from bunsen.issue_agent.agent import app\n>>> client = TestClient(app)\n>>> client.get("/healthcheck").status_code, client.get("/healthcheck").json()\n(200, {\'status\': \'ok\'})\n>>> client.get("/health").status_code, client.get("/health").json()\n(200, {\'status\': \'ok\'})\n```\n\nLet me know if you need any adjustments!', role='assistant', tool_calls=None, function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=1188, prompt_tokens=21918, total_tokens=23106, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=1024, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=21504, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:44:29,793 - DEBUG - swea-lm - input_tokens=21,488, output_tokens=147, instance_cost=0.40, cost=0.01
+2025-08-25 18:44:29,794 - DEBUG - swea-lm - total_tokens_sent=510,862, total_tokens_received=147, total_cost=0.40, total_api_calls=43
+2025-08-25 18:44:29,795 - WARNING - swea-agent - Requerying model after FunctionCallingFormatError (1th requery)
+2025-08-25 18:44:30,120 - WARNING - swea-agent - Your last output did not use any tool calls!
+Please make sure your output includes exactly _ONE_ function call!
+You must invoke the function directly using the function call format.
+You cannot invoke commands with ```, you have to use the function call format.
+If you think you have already resolved the issue, please submit your changes by running the `submit` command.
+If you think you cannot solve the problem, please run `exit_forfeit` (if available) or `submit`.
+Else, please continue with a new tool call!
+2025-08-25 18:44:30,123 - DEBUG - swea-lm - n_cache_control: 3
+2025-08-25 18:44:30,136 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:44:49,448 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WT8MeJSFozppFkutJFl60RPE4CO', created=1756147470, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{}', name='submit'), id='call_phdrDqzdDfpISeGHg2zJcRQF', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=1682, prompt_tokens=22181, total_tokens=23863, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=1664, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=19200, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:44:49,452 - DEBUG - swea-lm - input_tokens=21,750, output_tokens=0, instance_cost=0.41, cost=0.02
+2025-08-25 18:44:49,453 - DEBUG - swea-lm - total_tokens_sent=532,612, total_tokens_received=147, total_cost=0.41, total_api_calls=44
+2025-08-25 18:44:49,454 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+submit
+2025-08-25 18:44:49,753 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:44:50,032 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+Thank you for your work on this issue. Please carefully follow the steps below to help review your changes.
+
+1. If you made any changes to your code after running the reproduction script, please run the reproduction script again.
+  If the reproduction script is failing, please revisit your changes and make sure they are correct.
+  If you have already removed your reproduction script, please ignore this step.
+2. Remove your reproduction script (if you haven't done so already).
+3. If you have modified any TEST files, please revert them to the state they had before you started fixing the issue.
+  You can do this with `git checkout -- /path/to/test/file.py`. Use below <diff> to find the files you need to revert.
+4. Run the submit command again to confirm.
+
+Here is a list of all of your changes:
+
+<diff>
+diff --git a/bunsen/issue_agent/agent.py b/bunsen/issue_agent/agent.py
+index 6475a0f..1ad716d 100644
+--- a/bunsen/issue_agent/agent.py
++++ b/bunsen/issue_agent/agent.py
+@@ -34,6 +34,14 @@ def root():
+     return "The Bunsen issue-agent is running!"
+ 
+ 
++@app.get("/health")
++@app.get("/healthcheck")
++def health():
++    """Health endpoint to confirm the application is healthy."""
++    return {"status": "ok"}
++
++
++
+ @app.post("/github-webhook")
+ async def github_webhook(request: Request):
+     """Endpoint to receive and process GitHub webhook events.
+
+</diff>
+
+
+2025-08-25 18:44:50,094 - INFO - swea-agent - ========================= STEP 45 =========================
+2025-08-25 18:44:50,097 - DEBUG - swea-lm - n_cache_control: 3
+2025-08-25 18:44:50,108 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:44:52,696 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WTS3U1X7Pci7kdEVBosr1XPai6a', created=1756147490, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='stop', index=0, message=Message(content='I added a new dual-binding health endpoint in `bunsen/issue_agent/agent.py`—accessible via both `/health` and `/healthcheck`—that returns a simple JSON status confirming the service is healthy. I confirmed these endpoints (and the existing root endpoint) all respond correctly using FastAPI’s TestClient.\n\nLet me know if you’d like any further adjustments!', role='assistant', tool_calls=None, function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=89, prompt_tokens=22280, total_tokens=22369, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=0, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=0, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:44:52,701 - DEBUG - swea-lm - input_tokens=21,857, output_tokens=77, instance_cost=0.44, cost=0.02
+2025-08-25 18:44:52,702 - DEBUG - swea-lm - total_tokens_sent=554,469, total_tokens_received=224, total_cost=0.44, total_api_calls=45
+2025-08-25 18:44:52,703 - WARNING - swea-agent - Requerying model after FunctionCallingFormatError (1th requery)
+2025-08-25 18:44:52,987 - WARNING - swea-agent - Your last output did not use any tool calls!
+Please make sure your output includes exactly _ONE_ function call!
+You must invoke the function directly using the function call format.
+You cannot invoke commands with ```, you have to use the function call format.
+If you think you have already resolved the issue, please submit your changes by running the `submit` command.
+If you think you cannot solve the problem, please run `exit_forfeit` (if available) or `submit`.
+Else, please continue with a new tool call!
+2025-08-25 18:44:52,991 - DEBUG - swea-lm - n_cache_control: 3
+2025-08-25 18:44:53,002 - WARNING - swea-lm - No max input tokens found for model 'openai/o4-mini'. If you are using a local model, you can set `max_input_token` in the model config to override this.
+2025-08-25 18:44:58,382 - INFO - swea-lm - Response: ModelResponse(id='chatcmpl-C8WTW282RhUB2SQgG6Tacu2IZ9YiH', created=1756147494, model='o4-mini-2025-04-16', object='chat.completion', system_fingerprint=None, choices=[Choices(finish_reason='tool_calls', index=0, message=Message(content=None, role='assistant', tool_calls=[ChatCompletionMessageToolCall(function=Function(arguments='{}', name='submit'), id='call_mhceXxYKIGvLpbNjPxZCQpZB', type='function')], function_call=None, provider_specific_fields={'refusal': None}, annotations=[]), provider_specific_fields={})], usage=Usage(completion_tokens=274, prompt_tokens=22474, total_tokens=22748, completion_tokens_details=CompletionTokensDetailsWrapper(accepted_prediction_tokens=0, audio_tokens=0, reasoning_tokens=256, rejected_prediction_tokens=0, text_tokens=None), prompt_tokens_details=PromptTokensDetailsWrapper(audio_tokens=0, cached_tokens=21888, text_tokens=None, image_tokens=None)), service_tier='default')
+2025-08-25 18:44:58,386 - DEBUG - swea-lm - input_tokens=22,049, output_tokens=0, instance_cost=0.45, cost=0.01
+2025-08-25 18:44:58,387 - DEBUG - swea-lm - total_tokens_sent=576,518, total_tokens_received=224, total_cost=0.45, total_api_calls=46
+2025-08-25 18:44:58,388 - INFO - swea-agent - 💭 THOUGHT
+
+
+🎬 ACTION
+submit
+2025-08-25 18:44:58,687 - DEBUG - swea-tools - Retrieved state from environment: {'working_dir': '/thomaseleff__bunsen'}
+2025-08-25 18:44:58,691 - INFO - swea-agent - Found submission: diff --git a/bunsen/issue_agent/agent.py b/bunsen/issue_agent/agent.py
+index 6475a0f..1ad716d 100644
+--- a/bunsen/issue_agent/agent.py
++++ b/bunsen/issue_agent/agent.py
+@@ -34,6 +34,14 @@ def root():
+     return "The Bunsen issue-agent is running!"
+ 
+ 
++@app.get("/health")
++@app.get("/healthcheck")
++def health():
++    """Health endpoint to confirm the application is healthy."""
++    return {"status": "ok"}
++
++
++
+ @app.post("/github-webhook")
+ async def github_webhook(request: Request):
+     """Endpoint to receive and process GitHub webhook events.
+
+2025-08-25 18:44:58,956 - INFO - swea-agent - 🤖 MODEL INPUT
+OBSERVATION:
+diff --git a/bunsen/issue_agent/agent.py b/bunsen/issue_agent/agent.py
+index 6475a0f..1ad716d 100644
+--- a/bunsen/issue_agent/agent.py
++++ b/bunsen/issue_agent/agent.py
+@@ -34,6 +34,14 @@ def root():
+     return "The Bunsen issue-agent is running!"
+ 
+ 
++@app.get("/health")
++@app.get("/healthcheck")
++def health():
++    """Health endpoint to confirm the application is healthy."""
++    return {"status": "ok"}
++
++
++
+ @app.post("/github-webhook")
+ async def github_webhook(request: Request):
+     """Endpoint to receive and process GitHub webhook events.
+
+2025-08-25 18:44:59,025 - INFO - swea-agent - Trajectory saved to /home/runner/work/bunsen/bunsen/bunsen/trajectories/runner/swe_agent__openai/o4-mini__t-1.00__p-1.00__c-3.00___thomaseleff__bunsen-i3/thomaseleff__bunsen-i3/thomaseleff__bunsen-i3.traj
+2025-08-25 18:44:59,053 - INFO - swea-run - Done
+2025-08-25 18:44:59,053 - INFO - swea-env - Beginning environment shutdown...
+2025-08-25 18:44:59,326 - DEBUG - rex-deploy - Ensuring deployment is stopped because object is deleted
