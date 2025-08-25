@@ -86,7 +86,7 @@ jobs:
         run: |
           pip install --editable ./swe-agent
 
-      # Run the Coding Agent
+      # Run the swe-agent
       - name: Run swe-agent
         id: swe_task
         working-directory: ./bunsen
