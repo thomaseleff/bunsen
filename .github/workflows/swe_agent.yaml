@@ -118,10 +118,11 @@ jobs:
       # Open the pull request
       - name: Open pull request
         uses: actions/github-script@v6
-        if: ${{ steps.swe_task.outputs.exit_status == 'submitted' }}
+        working-directory: ./bunsen
         env:
           ISSUE_TITLE: ${{ 'beaker-swe-agent-issue-#' }}${{ github.event.inputs.issue_id }}
           BRANCH_NAME: ${{ 'beaker-swe-agent-issue-#' }}${{ github.event.inputs.issue_id }}
+        if: ${{ steps.swe_task.outputs.exit_status == 'submitted' }}
         with:
           script: |
             const issueUrl = 'https://github.com/${{ github.repository }}/issues/${{ github.event.inputs.issue_id }}';
